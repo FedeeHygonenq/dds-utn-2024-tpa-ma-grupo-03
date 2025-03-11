@@ -1,0 +1,37 @@
+services:
+  app:
+    image: dds-tp:latest
+    network_mode: host
+    ports:
+      - "9092:9092"
+    depends_on:
+      - mysql
+    environment:
+      - MYSQLDATABASE=tp_persistencia
+      - MYSQLHOST=localhost
+      - MYSQLPORT=3306
+      - MYSQLPASSWORD=1234
+      - MYSQLUSER=root
+      - MYSQL_URL=mysql://localhost:3306/tp_persistencia
+      - MODE=create
+      - test=true
+
+  mysql:
+    image: mysql:8.4.3
+    container_name: mysql_container
+    network_mode: host
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: tp_persistencia
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+
+
+
+
+
