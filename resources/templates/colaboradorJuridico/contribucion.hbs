@@ -1,0 +1,255 @@
+<div class="col-sm-6">
+    <div class="p-3">
+        <label for="formaContribucion" class="form-label p-2"> Forma de contribución* </label>
+        <select id="formaContribucion" class="form-select" onchange="mostrarFormulario(),calcularPuntos()" required>
+            <option selected disabled>Seleccioná una opción</option>
+            <option value="dinero">Colaborar con dinero</option>
+            <option value="hacerseCargoHeladera">Colaborar haciendose cargo de una heladera</option>
+            <option value="beneficio">Colaborar ofreciendo un beneficio a los colaboradores</option>
+        </select>
+    </div>
+    <form class="" id="contribucionDineroForm" style="display: none;" hx-post="/colaborador/contribuir"
+          hx-target="#modals-alert">
+        <div class="p-3">
+            <label for="CantidadADonar" class="form-label ">Cantidad a donar</label>
+            <input type="number" class="form-control " id="CantidadADonar" name="cantidadADonar"
+                   placeholder="Ingrese la cantidad a donar" onchange=calcularPuntosDinero()>
+        </div>
+        <div class="p-3">
+            <label for="frecuencia" class="form-label ">Frecuencia de donación </label>
+            <input type="number" class="form-control" id="frecuencia" name="frecuencia"
+                   placeholder="Ingrese cada cuantos días hara una donación" min=1>
+        </div>
+        <input type="text" name="formaContribucion" value="dinero" style="display: none;">
+    </form>
+    <form class="" id="contribucionBeneficioForm" hx-post="/colaborador/contribuir"
+          hx-target="#modals-alert" enctype="multipart/form-data" style="display: none;">
+        <div class="p-3">
+            <label for="nombreProductoServicio" class="form-label ">Nombre de la oferta*</label>
+            <input type="text" class="form-control " id="nombreProductoServicio" name="nombreOferta"
+                   placeholder="Ingrese el nombre del producto/servicio">
+            <label for="stockProductoServicio" class="form-label ">Stock de la oferta*</label>
+            <input type="number" class="form-control " id="stockProductoServicio" name="stockOferta"
+                   placeholder="Ingrese el stock de la oferta">
+        </div>
+        <div id="campos">
+            <div class="p-3 row">
+                <div class="col-sm-6">
+                    <label for="nombreProductoServicio" class="form-label ">Nombre del
+                        producto/servicio*</label>
+                    <input type="text" class="form-control " id="nombreProductoServicio" name="nombreItemCatalogo"
+                           placeholder="Ingrese el nombre del producto/servicio">
+                </div>
+                <div class="col-sm-2">
+                    <label for="cantidadProductoServicio" class="form-label ">Cantidad</label>
+                    <input type="number" class="form-control " id="cantidadProductoServicio" name="cantidadItemCatalogo"
+                           placeholder="1" min=1 required>
+                </div>
+                <div class="col-sm-2">
+                    <label for="precioProductoServicio" class="form-label ">Precio</label>
+                    <input type="number" class="form-control " id="precioProductoServicio" name="precioItemCatalogo"
+                           placeholder="100" min=1 required>
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" id="agregar-campo" class="btn btn-primary">Agregar campo</button>
+                </div>
+            </div>
+        </div>
+        <div class="input-group p-3">
+            <label for="subirArchivo" class="form-label w-100">Foto o imagen del
+                producto/servicio</label>
+            <input type="file" class="form-control" id="subirArchivo" name="imagenItem" accept="image/*">
+            <input type="text" name="formaContribucion" value="beneficio" style="display: none;">
+        </div>
+    </form>
+    <div id="bloque-campos-plantilla" style="display: none;">
+        <div class="p-3 row">
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="nombreItemCatalogo"
+                       placeholder="Ingrese el nombre del producto/servicio" required>
+            </div>
+            <div class="col-sm-2">
+                <input type="number" class="form-control" name="cantidadItemCatalogo"
+                       placeholder="1" min=1 required>
+            </div>
+            <div class="col-sm-2">
+                <input type="number" class="form-control " name="precioItemCatalogo"
+                       placeholder="100" min=1 required>
+            </div>
+        </div>
+    </div>
+    <div style="display: none;" id="containerFormHeladera">
+        <form class="" id="contribucionHeladeraForm" hx-post="/colaborador/contribuir"
+              hx-target="#modals-alert" >
+            <div class="col-sm m-3">
+                <label for="direccion" class="form-label">Direccion</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Av. Santa Fe 1000" required>
+                <label for="name" class="form-label m-2">Nombre</label>
+                <input type="text" class="form-control" id="name" name="nombre" placeholder="Heladera Medrano" required>
+                    <label for="modelo" class="form-label m-2">Modelo de heladera</label>
+                    <select class="form-select" id="modelo" name="modelo">
+                        <option selected>Seleccioná una opción</option>
+                        {{#each modelosHeladeras}}
+                            <option value="{{this.id}}">{{this.nombre}}:  {{this.temperaturaMinima}}°C | {{this.temperaturaMaxima}}°C Capacidad: {{this.capacidadEnViandas}}</option>
+                        {{/each}}
+                    </select>
+                <input type="text" name="formaContribucion" value="hacerseCargoHeladera" style="display: none;">
+            </div>
+        </form>
+
+        <form class="row d-flex align-items-end" hx-get="/colaborador/contribuir/consultarPuntoRecomendado"
+              hx-target="#direccion-peticion" id="puntoRecomendadoForm">
+            <div class="col-8  mx-auto px-auto">
+                <label for="kms" class="form-label m-2 w-10">Kms a la redonda*</label>
+                <input type="number" class="form-control" id="kms" placeholder="10" name="kms">
+                <input type="text" class="form-control" id="latitud-central" name="latitud-central"
+                       style="display: none;" value="">
+                <input type="text" class="form-control" id="longitud-central" name="longitud-central"
+                       style="display: none;" value="">
+            </div>
+            <div class="col-2  mx-auto px-auto">
+                <button class="btn btn-primary "
+                        type="submit" form="puntoRecomendadoForm" id="boton-punto-recomendado">Buscar
+                </button>
+            </div>
+            <div class="col-2 mx-auto px-auto mb-1">
+                <button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="tooltip"
+                        data-bs-placement="right"
+                        data-bs-title="Haciendo click en el mapa, se mostrará el punto que se tomara como punto central para hacer la busqueda, luego deberas agregar los Km a la redonda de esa punto y de esa forma se determinara un area para hacer una busqueda de puntos recomendados"
+                        style=" color: black; background: none">
+                    <i class="bi bi-patch-question"></i>
+                </button>
+            </div>
+            <div id="map" class="m-2 "></div>
+        </form>
+    </div>
+</div>
+
+<style>
+    img.huechange {
+        filter: hue-rotate(120deg);
+    }
+</style>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    let map;
+
+    function initMap() {
+        const mapElement = document.getElementById('map');
+
+        map = L.map(mapElement).setView([-34.603722, -58.381592], 10);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 18,
+            minZoom: 2,
+        }).addTo(map);
+
+        const locations = JSON.parse('{{{json heladeras}}}').map(heladera => heladera.puntoEstrategico);
+        locations.forEach(location => {
+
+            var marker = L.marker([location.direccion.latitud, location.direccion.longitud])
+                    .addTo(map).bindPopup(`<b>${location.nombre}</b>`)
+                    .openPopup();
+
+        });
+
+        let previousMarker;
+        map.on('click', (e) => {
+            // Obtiene las coordenadas del clic
+            const lat = e.latlng.lat;
+            const lng = e.latlng.lng;
+
+            // Elimina el marcador anterior si existe
+            if (previousMarker) {
+                map.removeLayer(previousMarker);
+            }
+
+            // Crea un nuevo marcador en la posición del clic
+            const marker = L.marker([lat, lng]).addTo(map);
+            marker._icon.classList.add("huechange");
+            // Actualiza la variable para almacenar el nuevo marcador
+            previousMarker = marker;
+
+            // Obtiene el input de dirección y lo actualiza con las coordenadas
+            const latitudInput = document.getElementById('latitud-central');
+            const longitudInput = document.getElementById('longitud-central');
+            latitudInput.value = lat;
+            longitudInput.value = lng;
+        });
+    }
+
+</script>
+<div id="direccion-peticion" hx-swap-oob="true" style="display: none;"></div>
+<script>
+    // Selecciona el botón y el contenedor de campos
+    const botonAgregarCampo = document.getElementById('agregar-campo');
+    const contenedorCampos = document.getElementById('campos');
+    const bloqueCamposPlantilla = document.getElementById('bloque-campos-plantilla');
+
+    // Función para agregar un nuevo campo
+    function agregarCampo() {
+        // Crea una copia del bloque de campos plantilla
+        const bloqueCampos = bloqueCamposPlantilla.children[0].cloneNode(true);
+
+        // Agrega el bloque de campos al contenedor
+        contenedorCampos.appendChild(bloqueCampos);
+    }
+
+    // Agrega evento de clic al botón
+    botonAgregarCampo.addEventListener('click', agregarCampo);
+
+    function mostrarFormulario() {
+        document.getElementById('contribucionDineroForm').style.display = 'none';
+        document.getElementById('contribucionBeneficioForm').style.display = 'none';
+        document.getElementById('containerFormHeladera').style.display = 'none';
+        document.getElementById('boton-dinero').style.display = 'none';
+        document.getElementById('boton-heladera').style.display = 'none';
+        document.getElementById('boton-beneficio').style.display = 'none';
+
+        var seleccion = document.getElementById('formaContribucion').value;
+
+        if (seleccion === 'dinero') {
+            document.getElementById('contribucionDineroForm').style.display = 'block';
+            document.getElementById('boton-dinero').style.display = 'block';
+        } else if (seleccion === 'beneficio') {
+            document.getElementById('contribucionBeneficioForm').style.display = 'block';
+            document.getElementById('boton-beneficio').style.display = 'block';
+        } else if (seleccion === 'hacerseCargoHeladera') {
+            document.getElementById('containerFormHeladera').style.display = 'block';
+            document.getElementById('boton-heladera').style.display = 'block';
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+            initMap();
+        }
+    }
+</script>
+<script>
+    function calcularPuntosDinero() {
+        let contribucion_form = document.getElementById('CantidadADonar').value;
+        let puntosAcumulados = document.getElementById('puntosAcumulados');
+        //setea el valor
+        var puntos = ((contribucion_form) * multiplicadorDinero);
+        puntosAcumulados.textContent = puntos.toString();
+    }
+
+    function mostrarCantidadDePuntosPorHeladera(){
+
+        const puntosAcumulados = document.getElementById('puntosAcumulados');
+         puntosAcumulados.textContent = "De momento por esta contribucion no tendras beneficios, pero seras reconocido por la contribucion atraves de imagen, quizas mas adelante se sume la posibilidad de sumar";}
+    function mostrarCantidadDePuntosPorOferta(){
+
+        const puntosAcumulados = document.getElementById('puntosAcumulados');
+        puntosAcumulados.textContent = "Por cada heladera acumulas puntos teniendo en cuenta la cantidad de meses activa y se multiplica por " + multiplicadorHeladera.toString();
+    }
+    function calcularPuntos(){
+        let elemento = document.getElementById('formaContribucion').value;
+        const  puntosAcumulados = document.getElementById('puntosAcumulados');
+        if(elemento === "dinero") puntosAcumulados.textContent = "";
+        if(elemento === "hacerseCargoHeladera" ) mostrarCantidadDePuntosPorOferta();
+        if(elemento === "beneficio") mostrarCantidadDePuntosPorHeladera();
+    }
+</script>

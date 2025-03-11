@@ -1,0 +1,165 @@
+{{#block "links-header"}}
+    <link rel="stylesheet" href="/css/registro.css">
+{{/block}}
+
+{{#partial "contenido"}}
+    <h1 class="text-center pt-4 fw-bolder">Registrarse</h1>
+    <div class="container container-formulario d-flex justify-content-center align-items-center">
+        <form class="row m-2 justify-content-center align-items-center" hx-post="/signup/colaborador/juridico"
+              hx-target="#modals-alert">
+            <div class="col">
+                <div class="row">
+                    <div class="col mb-2">
+                        <label for="userForm" class="form-label">Usuario*</label>
+                        <input type="text" class="form-control" id="userForm" name="usuario" placeholder="carlitos17"
+                               required>
+                    </div>
+                    <div class="col mb-2">
+                        <label for="password" class="form-label">Contraseña*</label>
+                        <input type="password" class="form-control" id="password" name="contrasenia" placeholder="********"
+                               required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mb-2">
+                        <label for="firstNameForm" class="form-label">Razón social*</label>
+                        <input type="text" class="form-control" id="firstNameForm" name="razonSocial"
+                               placeholder="Ejemplo S.R.L."
+                               required>
+                    </div>
+                    <div class="col mb-2">
+                        <label class="form-label">Tipo organización*</label>
+                        <select class="form-select" name="tipoOrganizacion" aria-label="Tipo organización" required>
+                            <option selected>Seleccioná una opción</option>
+                            {{#each tiposOrganizacion}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="col mb-2">
+                        <label class="form-label">Tipo rubro*</label>
+                        <select class="form-select" name="tipoRubro" aria-label="Tipo rubro" required>
+                            <option selected>Seleccioná una opción</option>
+                            {{#each tiposRubro}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label fs-5 fw-semibold">Medios de comunicación</label>
+                    <div class="row">
+                        <div class="col mb-2 fs-6">
+                            <label for="emailForm" class="form-label">Correo electrónico*</label>
+                            <input type="email" class="form-control" id="emailForm" name="correoElectronico"
+                                   placeholder="usuario@hola.com">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-2 fs-6">
+                            <label for="whatsappForm" class="form-label">WhatsApp</label>
+                            <input type="tel" class="form-control" id="whatsappForm" name="nroWhatsapp"
+                                   placeholder="+54115050">
+                        </div>
+                        <div class="col mb-2 fs-6">
+                            <label for="telegramForm" class="form-label">Telegram</label>
+                            <input type="tel" class="form-control" id="telegramForm" name="nroTelegram"
+                                   placeholder="+54115050">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label fs-5 fw-semibold">Dirección*</label>
+                    <div class="row">
+                        <div class="col mb-2 fs-6">
+                            <label for="streetForm" class="form-label">Calle</label>
+                            <input type="text" class="form-control" id="streetForm" name="calle"
+                                   placeholder="Av. Medrano"
+                                   required>
+                            <input type="hidden" class="form-control" name="calle" value="Calle donde se encuentra la vivienda">
+                        </div>
+                        <div class="col mb-2 fs-6">
+                            <label for="streeNumbertForm" class="form-label">Altura</label>
+                            <input type="text" class="form-control" id="streeNumbertForm" name="altura"
+                                   placeholder="951"
+                                   required>
+                            <input type="hidden" class="form-control" name="altura" value="Altura de la calle de la vivienda">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-2 fs-6">
+                            <label for="floorForm" class="form-label">Piso/Depto</label>
+                            <input type="text" class="form-control" id="floorForm" name="pisoDto" placeholder="PB" value="0">
+                            <input type="hidden" class="form-control" name="pisoDto"
+                                   value="Piso o departamento de la vivienda">
+                        </div>
+                        <div class="col mb-2 fs-6">
+                            <label for="postalCodeForm" class="form-label">Código postal</label>
+                            <input type="text" class="form-control" id="postalCodeForm" name="codigoPostal"
+                                   placeholder="1173" required>
+                            <input type="hidden" class="form-control" name="codigoPostal" value="Codigo postal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container col m-1">
+                <div class="card card-register">
+                    <h5 class="card-header card-header-register">¡Animate a colaborar y hacé la diferencia!</h5>
+                    <div class="card-body card-body-register p-3">
+                        <p class="card-text">Te invitamos a sumarte a nuestra causa para ayudar a
+                            personas que lo necesitan. Podés seleccionar las siguientes formas de colaborar:</p>
+                        <ul class="entry-content">
+                            <li>Donando dinero</li>
+                            <li>Haciéndote cargo de una heladera</li>
+                            <li>Siendo un Sponsor que ofrece productos a cambio de puntos en nuestra web</li>
+                        </ul>
+                        <p class="card-text pt-4">Al colaborar, no solo estarás brindando apoyo a quienes más lo
+                            necesitan, sino que
+                            también estarás acumulando puntos que podrás canjear por diferentes beneficios.
+                            ¡Tu ayuda es valiosa y tiene un impacto real en la vida de muchas personas! </p>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4 container-fluid">Registrarse</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="modals-alert"
+         class="modal modal-blur fade"
+         style="display: none"
+         aria-hidden="false"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        document.body.addEventListener('htmx:beforeSwap', function (evt) {
+            if (evt.detail.xhr.status === 409 || evt.detail.xhr.status === 422) {
+                evt.detail.shouldSwap = true;
+                evt.detail.isError = false;
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('htmx:afterSwap', function (event) {
+            if (event.detail.target.id === 'modals-alert') {
+                var modal = new bootstrap.Modal(document.getElementById('modals-alert'), {});
+                modal.show();
+            }
+        });
+    </script>
+{{/partial}}
+
+{{#partial "header-izquierdo"}}
+    <li class="nav-item">
+        <a class="nav-link active py-0" href="/signup/colaborador/juridico">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link  py-0" href="/preguntasFrecuentes">Preguntas Frecuentes</a>
+    </li>
+{{/partial}}
+
+{{> templates/base}}

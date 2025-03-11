@@ -1,0 +1,10 @@
+{{#if success}}
+    <div class="alert alert-success" role="alert">
+        <p class="text-center">{{message}}</p>
+    </div>
+{{else}}
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading text-center">¡Ocurrió un error procesando su archivo!</h4>
+        <p class="text-center">{{message}}</p>
+    </div>
+{{/if}}

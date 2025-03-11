@@ -1,0 +1,20 @@
+<div class="modal-dialog modal-dialog-centered modal-lg modal-error">
+    <div class="modal-content modal modal-error-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Hubo un problema</h5>
+        </div>
+        <div class="modal-body">
+            <p>{{errorMessage}}</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModalButton">Cerrar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('closeModalButton').addEventListener('click', function() {
+        var modal = bootstrap.Modal.getInstance(document.getElementById('modals-alert'));
+        modal.hide();
+    });
+</script>

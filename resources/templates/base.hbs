@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="icon" href="/img/iconos/marca-sin-fondo.png" type="image/png">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://unpkg.com/htmx.org@2.0.3"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/path-params.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    {{#block "links-header"}}
+    {{/block}}
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <nav class="navbar navbar-expand-lg sticky-top">
+            <div class="container-fluid p-0 px-lg-2">
+                <a href="" class="navbar-brand text-black py-0 fs-3 "> <img src="/img/iconos/marca.png" height="60em"
+                                                                            alt="Logo"
+                                                                            class="d-inline-block align-content-center">
+                    Viandas de Esperanza </a>
+                <button class="navbar-toggler" type="submit" data-bs-toggle="collapse" data-bs-target="#containerColapseNav"
+                        aria-controls="containerColapseNav" aria-expanded="false" aria-label="Toggle navigation" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse pe-3" id="containerColapseNav">
+                    <ul class="navbar-nav">
+                        {{#block "header-izquierdo"}}
+                        {{/block}}
+                    </ul>
+                    <div class="nav-item dropdown col-lg-auto ms-auto">
+                        {{#block "header-derecho"}}
+                        {{/block}}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="p-0">
+            {{#block "contenido"}}
+            {{/block}}
+        </main>
+
+        <footer class="text-white text-center p-0 py-4 footer">
+            <div class="container-fluid footer-container m-0">
+                <div class="row">
+                    <!-- Enlaces a la izquierda -->
+                    <div class="col-sm-6 d-flex align-items-center ">
+                        <img src="/img/iconos/marca-sin-fondo.png" height="40em" alt="Logo" class="p-0 m-0">
+                        <p class="mb-0 ps-4">© 2024 Viandas de Esperanza. Todos los derechos reservados.</p>
+                    </div>
+                    <!-- Contacto a la derecha -->
+                    <div class="col-sm-6 d-flex justify-content-end align-items-center pe-4">
+                        <p class=" mb-0">Contacto: </p>
+                        <a class="footer-icon" href=""><i class="bi bi-instagram ps-3"></i></a>
+                        <a class="footer-icon" href=""><i class="bi bi-twitter-x ps-3"></i></a>
+                        <a class="footer-icon" href=""><i class="bi bi-whatsapp ps-3"></i></a>
+                        <a class="footer-icon" href=""><i class="bi bi-tiktok px-3"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                crossorigin="anonymous"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+.titulo {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2rem;
+    font-weight: bold;
+}
+
+/* Aumenta el tamaño del texto de las preguntas */
+.accordion-button {
+    font-size: 2rem; /* Ajusta según el tamaño deseado */
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Centra el contenedor del acordeón */
+.grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 0; /* Añade espacio arriba y abajo */
+}
+
+/* Aumenta el ancho del acordeón para que no quede demasiado comprimido */
+.accordion-item {
+    max-width: 700px; /* Ajusta este valor según el ancho deseado */
+    margin: 0 auto; /* Centra el acordeón horizontalmente */
+}

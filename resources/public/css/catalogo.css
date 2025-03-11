@@ -1,0 +1,66 @@
+.titulo {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+.card-puntos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 0;
+    background-color: #cffff3 !important;
+    width: 100%;
+    font-size: 1em;
+}
+
+.elemento-catalogo {
+    min-height: 20em;
+    max-height: 25em; /* Aumentamos el alto máximo para permitir más contenido */
+    width: 20em !important;
+    display: flex;
+    flex-direction: column; /* Organiza el contenido de arriba hacia abajo */
+    justify-content: space-between; /* Asegura que el contenido se distribuya dentro del contenedor */
+    align-items: center;
+    text-align: center;
+}
+
+.elemento-catalogo img {
+    width: 50%;
+    height: 10em;
+    object-fit: revert;
+    margin-top: 0.3em;
+}
+
+.elemento-catalogo .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+.elemento-catalogo .card-body .btn {
+    margin-top: auto; /* Empuja el botón hacia abajo */
+    align-self: center; /* Asegura que el botón esté centrado */
+}
+
+@media (max-width: 768px) {
+    .contenedor-header {
+        flex-direction: column; /* Stack elements vertically */
+    }
+
+    .card-puntos {
+        width: 50%;
+        position: static; /* Reset position for mobile */
+    }
+
+    .titulo {
+        align-items: center; /* Center titles */
+    }
+}

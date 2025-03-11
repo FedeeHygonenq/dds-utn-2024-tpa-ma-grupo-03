@@ -1,0 +1,56 @@
+.contenedor-iconos{
+    background-color: #a2ecdc;
+    height: 30em;
+    align-content: center;
+}
+
+.icono{
+    font-size: 7.5em;
+    border-radius: 15px;
+    border: 4px solid black;
+}
+
+.boton-elemento{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+
+}
+
+.titulo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lista-opciones{
+    width: 60%;
+    margin: 0 auto; /* Center horizontally */
+}
+
+.icono-lista{
+    font-size: 4em;
+}
+
+.svg-lista{
+    height: 95px;
+    padding: 0;
+    margin: 0;
+
+}
+
+.elemento-lista:hover{
+    background-color: #a9f6e5 !important;
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+    .contenedor-iconos {
+        height: 45em; /* Ajustar la altura según sea necesario */
+    }
+
+    .lista-opciones{
+        width: 95%;
+    }
+}
+

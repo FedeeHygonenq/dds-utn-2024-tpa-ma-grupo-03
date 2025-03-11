@@ -1,0 +1,64 @@
+{{#partial "header-links"}}
+    <link rel="icon" href="/img/iconos/marca-sin-fondo.png" type="image/png">
+    <link rel="stylesheet" href="/css/gestionHeladerasYContribuciones.css">
+{{/partial}}
+
+{{#partial "header-izquierdo"}}
+    <li class="nav-item">
+        <a class="nav-link active py-0" href="/home">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link  py-0" href="/preguntasFrecuentes" target="_self">Preguntas Frecuentes</a>
+    </li>
+{{/partial}}
+
+{{> templates/partials/headerUsuario}}
+
+
+<!-- TODO la lógica en reporteFalla para que el back procese el input del usuario (consultar cargaCSV.hbs) -->
+{{#partial "contenido"}}
+    <h1 class="text-center pt-4 fw-bolder">Registro de Fallas <i class="bi bi-gear-wide-connected"></i></h1>
+    <div class="container-fluid container-formulario justify-content-center align-items-center m-auto">
+        <div class="row">
+            {{#ifEquals tipoUsuario "TECNICO"}}
+                {{> templates/general/heladeras/registrarFallaResuelta}}
+            {{else}}
+                {{> templates/general/heladeras/reporteFallaColaborador}}
+            {{/ifEquals}}
+            <div class="d-flex justify-content-center align-items-center mt-3">
+                <button type="submit" class="btn btn-danger boton-report">
+                    Reportar
+                </button>
+            </div>
+        </div>
+        </form>
+    </div>
+    </div>
+
+    <div id="modals-alert"
+         class="modal modal-blur fade"
+         style="display: none"
+         aria-hidden="false"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        document.body.addEventListener('htmx:beforeSwap', function (evt) {
+            if (evt.detail.xhr.status === 409 || evt.detail.xhr.status === 422 || evt.detail.xhr.status === 400) {
+                evt.detail.shouldSwap = true;
+                evt.detail.isError = false;
+            }
+        });
+        document.addEventListener('htmx:afterSwap', function (event) {
+            if (event.detail.target.id === 'modals-alert') {
+                var modal = new bootstrap.Modal(document.getElementById('modals-alert'), {});
+                modal.show();
+            }
+        });
+    </script>
+{{/partial}}
+
+{{> templates/base}}

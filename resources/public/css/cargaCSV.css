@@ -1,0 +1,33 @@
+.titulo {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2rem;
+    font-weight: bold;
+}
+
+.texto {
+    font-size: 1.5rem;
+    text-align: center;
+    align-items: center;
+    margin-top: 5rem;
+    margin-bottom: 0.1rem; /* Espacio entre el texto y el botón */
+}
+.form-core{
+    font-size: 2rem;
+    max-width: 80%
+}
+.archivo{
+    margin: 0.5em auto !important;
+    max-width: 12em;
+
+}
+.boton-csv:hover{
+    background-color: #6befd0 !important;
+}
+.boton-csv{
+
+    border-radius: 20px !important;
+
+}

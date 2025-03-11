@@ -1,0 +1,87 @@
+.container-formulario-contribucion {
+    background-color: rgba(225, 255, 245, 0.49);
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-texto {
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 800px;
+    max-height: 400px;
+}
+
+.card-title {
+    background-color: #acfae9;
+}
+
+.container-formulario {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4em !important;
+}
+
+.boton-consulta {
+    padding: 0.5em 2em !important;
+    font-size: 1.5em !important;
+    background-color: rgba(43, 213, 172, 0.76) !important;
+
+}
+
+.boton-consulta:hover {
+    background-color: #6befd0 !important;
+}
+
+.boton-confirmacion {
+    padding: 0.5em 2em !important;
+    font-size: 1em !important;
+    color: white !important;
+    text-align: center !important;
+    justify-content: center !important;
+
+}
+
+.boton-confirmacion:hover {
+    background-color: #6befd0 !important;
+}
+
+.reporte-archivo{
+    align-self: center;
+    justify-self: center;
+}
+
+@media (max-width: 768px) {
+    .container-formulario {
+        height: 90%;
+    }
+
+    .container-texto {
+        max-height: 100%;
+    }
+}
+
+.modal-content {
+    background-color: #fafffe;
+}
+
+.boton-registrar {
+    padding: 0.65em 1.75em !important;
+    font-size: 1.2em !important;
+    background-color: rgba(43, 213, 172, 0.76) !important;
+}
+
+.boton-registrar:hover {
+    background-color: #6befd0 !important;
+}
+
+.container-formulario {
+    background-color: rgba(231, 253, 243, 0.58);
+}
+
+.form-label {
+    font-weight: bold;
+}

@@ -1,0 +1,100 @@
+{{#block "links-header"}}
+    <link rel="stylesheet" href="/css/gestionHeladerasYContribuciones.css" xmlns="http://www.w3.org/1999/html">
+{{/block}}
+
+{{> templates/partials/headerUsuario}}
+
+{{#partial "header-izquierdo"}}
+    <li class="nav-item">
+        <a class="nav-link active py-0" href="/home">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link  py-0" href="/preguntasFrecuentes" target="_self">Preguntas Frecuentes</a>
+    </li>
+{{/partial}}
+
+{{#partial "contenido"}}
+    <h1 class="text-center pt-4 fw-bolder">Solicitud de apertura</h1>
+    <div class="row">
+        <div class="container col-sm d-flex align-items-center justify-content-center">
+            <form class="" id="solicitudAperturaForm" hx-post="/accion/solicitarApertura"
+                  hx-target="#modals-alert">
+                <div class="p-3">
+                    <label for="heladeraDestino" class="form-label">Heladera donde solicita la apertura</label>
+                    <select class="form-control" id="heladeraDestino" name="heladera">
+                        <option selected>Seleccioná una opción</option>
+                        {{#each heladeras}}
+                            <option value={{this.id}}>{{this.puntoEstrategico.nombre}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="p-3">
+                    <label for="accion" class="form-label">Acción a realizar</label>
+                    <select class="form-control" id="accion" name="accion">
+                        <option selected>Seleccioná una opción</option>
+                        {{#each tiposAccion}}
+                            <option value={{this}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="p-3">
+                    <label for="motivoApertura" class="form-label">Motivo de la apertura</label>
+                    <select class="form-control" id="motivoApertura" name="motivoApertura">
+                        <option selected>Seleccioná una opción</option>
+                        {{#each motivosApertura}}
+                            <option value={{this}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="p-3">
+                    <label for="tarjeta" class="form-label ">Número de tarjeta</label>
+                    <input type="text" class="form-control" id="tarjeta" name="tarjeta"
+                           placeholder="1234567889" min=1>
+                </div>
+                <div class="d-flex justify-content-center">
+                <button type="submit"  class="btn btn-primary btn-lng boton-confirmacion">
+                    Confirmar
+                </button>
+            </div>
+            </form>
+        </div>
+
+        <div class="container col-sm d-flex align-items-center justify-content-center">
+            <div class="card w-100">
+                <h5 class="text-center card-title m-0 p-2"><strong> ¡Recordá!</strong></h5>
+                <div class="container-texto text-center align-items-center  card-body">
+                    <p class="">
+                        Tendras 3 horas a partir del momento en el cual se realiza la solicitud de apertura de la heladera.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="modals-alert"
+         class="modal modal-blur fade"
+         style="display: none"
+         aria-hidden="false"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        document.body.addEventListener('htmx:beforeSwap', function (evt) {
+            if (evt.detail.xhr.status === 409 || evt.detail.xhr.status === 422 || evt.detail.xhr.status === 400) {
+                evt.detail.shouldSwap = true;
+                evt.detail.isError = false;
+            }
+        });
+        document.addEventListener('htmx:afterSwap', function (event) {
+            if (event.detail.target.id === 'modals-alert') {
+                var modal = new bootstrap.Modal(document.getElementById('modals-alert'), {});
+                modal.show();
+            }
+        });
+    </script>
+{{/partial}}
+
+{{> templates/base}}

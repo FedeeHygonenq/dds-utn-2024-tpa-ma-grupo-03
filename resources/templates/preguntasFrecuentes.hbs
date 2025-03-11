@@ -1,0 +1,94 @@
+{{#partial "header-links"}}
+    <link rel="stylesheet" href="/css/preguntasFrecuentes.css">
+{{/partial}}
+
+{{#partial "header-izquierdo"}}
+    <li class="nav-item">
+        <a class="nav-link active py-0" href="/home">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link  py-0" href="#" target="_self">Preguntas Frecuentes</a>
+    </li>
+{{/partial}}
+
+{{> templates/partials/headerUsuario}}
+
+
+{{#partial "contenido"}}
+    <div class="grid text-center">
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        ¿Cómo funciona el programa de heladeras comunitarias?
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">A través de nuestra red de heladeras, las personas en situación vulnerable que fueron registradas dentro de nuestro sistema pueden acceder a una cierta cantidad de viandas de altísima calidad. ¡La red de heladeras y el sistema completo se sustentan de las contribuciones de nuestros colaboradores!</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        ¿Qué formas existen de colaborar?
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Si sos una <strong>persona humana</strong> podés colaborar: donando dinero en un pago único o periódicamente, donando viandas para las heladeras, distribuyendo las viandas a las heladeras, y registrando a personas en situación vulnerable en nuestro sistema. <br>Si sos una <strong>persona jurídica</strong> podés colaborar: donando dinero en un pago único o periódicamente, haciéndote cargo de una heladera, y siendo sponsor en nuestro sistema. </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                        ¿Qué implica ser "sponsor"?
+                    </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Si decidís colaborar convirtiéndote en sponsor de nuestro sistema, podés ofrecer productos o servicios a través de nuestro catálogo, en el cuál podrán ser canjeados por puntos.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                        ¿Cómo funciona el catálogo?
+                    </button>
+                </h2>
+                <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Nuestro catálogo funciona con un sistema de puntos, los cuales pueden ser canjeados por los colaboradores a cambio de productos y servicios ofrecidos por nuestros sponsors. Para obtener puntos, es necesario realizar contribuciones (cada contribución brinda una cantidad específica de puntos).</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                        ¿Dónde puedo encontrar las heladeras comunitarias?
+                    </button>
+                </h2>
+                <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Para encontrar las heladeras, podés dirigirte al mapa de nuestra página principal <!-- Acá podríamos agregar algún link --> o, si estás registrado, consultarlo en tu página de inicio. Ahí vas a poder ver los distintos puntos donde encontrar las heladeras, con sus nombres y direcciones respectivos.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                        ¿Cómo garantizan la calidad y seguridad de los alimentos en las heladeras?
+                    </button>
+                </h2>
+                <div id="flush-collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Nuestro sistema cuenta con un registro de la fecha de vencimiento de cada vianda donada, asegurando que ninguna se eche a perder por pasar demasiado tiempo sin ser tomada. Además, nuestras heladeras cuentan con sensores tanto de temperatura como de movimiento para evitar que las viandas se estropeen por desperfectos o que alguien intente abrir las heladeras para tomar viandas sin permiso.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
+                        ¿Qué debo hacer si veo una heladera que necesita mantenimiento o está vacía?
+                    </button>
+                </h2>
+                <div id="flush-collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Si al visitar una heladera te encontraste con algo que te llamó la atención, accedé a a tu cuenta y reportá la falla <!-- Acá otro link --> brindando tanto una descripción de lo que viste como, de ser posible, una foto. De esta forma, seremos capaces de enviar al técnico a cargo de la heladera correspondiente para solucionar el problema a la brevedad.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/partial}}
+
+{{> templates/base}}

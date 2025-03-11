@@ -1,0 +1,50 @@
+
+.container-presentacion {
+    background-color: #c2f0f0 !important;
+}
+
+#map {
+    width: 95%;
+    height: 50vh; /* La altura será la mitad de la altura de la ventana */
+    margin-bottom: 20px; /* Espacio debajo del mapa */
+
+}
+
+
+.boton {
+    padding: 1.5em 2em !important;
+    font-size: 1.5em !important;
+    background-color: rgba(43, 213, 172, 0.76) !important;
+    margin: 1.5em auto !important;
+    max-width: 40%;
+    border-radius: 20px !important;
+}
+
+.boton:hover{
+    background-color: #6befd0 !important;
+}
+
+.seleccion {
+    margin: 20em 0;
+    min-height: 50dvh;
+    background-color: rgba(225, 255, 250, 0.7);
+    display: flex; /* Enable flexbox layout */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+
+
+
+@media (max-width: 768px) {
+    .seleccion {
+        display: block;
+
+    }
+
+    .boton {
+        max-width: 100%;
+    }
+}
+
+

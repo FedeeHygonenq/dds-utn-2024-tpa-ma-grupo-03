@@ -1,0 +1,32 @@
+{{#block "links-header"}}
+    <link rel="stylesheet" href="/css/accionSobreHeladera.css">
+{{/block}}
+
+{{#partial "header-izquierdo"}}
+    {{> templates/general/headerIzquierdo }}
+{{/partial}}
+{{#partial "header-derecho"}}
+    {{> templates/partials/headerUsuario}}
+{{/partial}}
+
+{{#partial "contenido"}}
+    <h1 class="text-center pt-4 fw-bolder">Acciones a realizar sobre heladeras</h1>
+    <div class="container container-formulario  align-items-center">
+        <div class="row justify-content-center aling-items-center mb-2 seleccion-accion ">
+            <a class="col-md-4 text-center m-auto " href="/accion/heladera/consultas">
+                <button type="button" class="btn btn-lg boton-titulo boton-icono">
+                    <p>Consulta sobre heladeras</p>
+                    <i class="bi bi-search"></i>
+                </button>
+            </a>
+            <a class="col-md-4 text-center m-auto " href="/accion/heladera/baja">
+                <button type="button" class="btn btn-lg boton-titulo boton-icono">
+                    <p>Dar de baja heladera</p>
+                    <i class="bi bi-x-circle"></i>
+                </button>
+            </a>
+        </div>
+    </div>
+{{/partial}}
+
+{{> templates/base}}

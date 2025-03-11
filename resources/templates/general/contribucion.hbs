@@ -1,0 +1,106 @@
+{{#block "links-header"}}
+    <link rel="stylesheet" href="/css/gestionHeladerasYContribuciones.css" xmlns="http://www.w3.org/1999/html">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <link rel="stylesheet" href="/css/mapa.css">
+{{/block}}
+
+{{> templates/partials/headerUsuario }}
+
+{{#partial "contenido"}}
+    <h1 class="text-center pt-4 fw-bolder">Contribuir</h1>
+    <div class="container container-formulario justify-content-center align-items-center ">
+        <div class="row ">
+            {{#ifEquals tipoUsuario "COLABORADOR_HUMANO"}}
+                {{> templates/colaboradorHumano/contribucion}}
+            {{else}}
+                {{> templates/colaboradorJuridico/contribucion}}
+            {{/ifEquals}}
+            <div class="container col-sm-6 d-flex align-items-center justify-content-center">
+                <div>
+                    <div class="card w-100">
+                        <h5 class="text-center card-title m-0 p-2"><strong> ¡Recordá!</strong></h5>
+                        <div class="container-texto text-center align-items-center  card-body">
+                            <p class="">
+                                Por realizar esta contribución, obtendrás
+                            <div id="puntosAcumulados"></div> puntos.
+                            Los mismos se suman a tu <u>billetera</u>, la cual podrás consultar en la <u>página principal</u>,
+                            y
+                            podrás <u>canjear ofertas de productos patrocinados</u> en nuestro sitio.
+                            <br></br><strong>¡Seguí contribuyendo</strong> con la causa para acumular más puntos
+                            y
+                            obtener más productos!
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center m-5">
+                        <button class="btn btn-primary boton-consulta" style="display: none;"
+                                type="submit" form="contribucionViandaForm" id="boton-viandas">Contribuir
+                        </button>
+                        <button class="btn btn-primary boton-consulta" style="display: none;"
+                                type="submit" form="contribucionDineroForm" id="boton-dinero">Contribuir
+                        </button>
+                        <button class="btn btn-primary boton-consulta" style="display: none;"
+                                type="submit" form="contribucionRepartoForm" id="boton-distribucion">Contribuir
+                        </button>
+                        <button class="btn btn-primary boton-consulta" style="display: none;"
+                                type="submit" form="contribucionHeladeraForm" id="boton-heladera">Contribuir
+                        </button>
+                        <button class="btn btn-primary boton-consulta" style="display: none;"
+                                type="submit" form="contribucionBeneficioForm" id="boton-beneficio">Contribuir
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modals-alert"
+         class="modal modal-blur fade"
+         style="display: none"
+         aria-hidden="false"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        document.body.addEventListener('htmx:beforeSwap', function (evt) {
+            if (evt.detail.xhr.status === 409 || evt.detail.xhr.status === 422 || evt.detail.xhr.status === 400 || evt.detail.xhr.status === 406) {
+                evt.detail.shouldSwap = true;
+                evt.detail.isError = false;
+            }
+        });
+        document.addEventListener('htmx:afterSwap', function (event) {
+            if (event.detail.target.id === 'modals-alert') {
+                var modal = new bootstrap.Modal(document.getElementById('modals-alert'), {});
+                modal.show();
+            }
+        });
+    </script>
+
+    <script>
+        const multiplicadorDinero = 0.5;// lo harcodeo momentaneamente porque me estaban pasando cualquier verdura
+        const multiplicadorViandasDonadas = {{multiplicadores.viandasDonadas}}
+        const multiplicadorEntregaTarjeta = {{multiplicadores.entregaTarjeta}}
+        const multiplicadorHeladera = {{multiplicadores.hacerseCargoDeHeladera}}
+        const multiplicadorViandasDistribuidas = {{multiplicadores.viandasDistribuidas}}
+    </script>
+
+    <script>
+        function mostrarPuntosAcumulados() {
+            const puntosAcumulados = document.getElementById('puntosAcumulados');
+            puntosAcumulados.textContent = "X puntos. "
+        }
+    </script>
+
+
+{{/partial}}
+
+{{#partial "header-izquierdo"}}
+    {{> templates/general/headerIzquierdo }}
+{{/partial}}
+
+{{> templates/base}}
+

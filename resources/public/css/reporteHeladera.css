@@ -1,0 +1,25 @@
+
+.boton {
+    padding: 0.5em 1em !important;
+    font-size: 2em !important;
+    background-color: white !important;
+    margin: 1.5em auto !important;
+
+    border-radius: 50px !important;
+}
+.boton-report{
+     padding: 0.5em 1em !important;
+        font-size: 1.5em !important;
+        margin: 1.5em auto !important;
+        color: white !important;
+}
+.container-formulario{
+    display: flex;
+
+}
+.boton:hover{
+    background-color: #6befd0 !important;
+}
+.boton-report:hover{
+    background-color: #6befd0 !important;
+}

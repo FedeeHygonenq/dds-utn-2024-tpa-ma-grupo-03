@@ -1,0 +1,15 @@
+.link-register {
+    color: #24d79d; /* Cambia #ff5733 por el color que desees */
+    text-decoration: none; /* Para quitar el subrayado */
+}
+
+.link-register:hover {
+    color: #0aa47c; /* Cambia #ff5733 por el color que desees */
+
+}
+
+.card-body {
+    background-color: #efffff;
+    border-radius: 20px;
+}
+

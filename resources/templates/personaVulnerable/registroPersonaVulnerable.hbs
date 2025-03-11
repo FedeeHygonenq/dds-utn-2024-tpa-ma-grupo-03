@@ -1,0 +1,169 @@
+{{#block "links-header"}}
+    <link rel="stylesheet" href="/css/registro.css">
+    <link rel="stylesheet" href="/css/gestionHeladerasYContribuciones.css">
+{{/block}}
+
+{{> templates/partials/headerUsuario }}
+
+
+{{#partial "header-izquierdo"}}
+    <li class="nav-item">
+        <a class="nav-link active py-0" href="/home">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link  py-0" href="/preguntasFrecuentes" target="_self">Preguntas Frecuentes</a>
+    </li>
+{{/partial}}
+
+{{#partial "contenido"}}
+    <h1 class="text-center pt-4 fw-bolder">Registro de persona vulnerable</h1>
+    <div class="container container-formulario justify-content-center align-items-center ">
+        <div class="row">
+            <form class="col-md-6" id="contribucionForm" hx-post="./personaVulnerable" hx-target="#modals-alert">
+                <div class="col">
+                    <div class="row">
+                        <div class="col mb-2">
+                            <label for="firstNameForm" class="form-label">Nombre(s)*</label>
+                            <input type="text" class="form-control" id="firstNameForm" name="nombre" placeholder="Juan"
+                                   required>
+                        </div>
+                        <div class="col mb-2">
+                            <label for="lastnameForm" class="form-label">Apellido(s)*</label>
+                            <input type="text" class="form-control" id="lastnameForm" name="apellido"
+                                   placeholder="Perez" required>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="birthdayForm" class="form-label">Fecha de nacimiento*</label>
+                        <input type="date" class="form-control" name="fechaNacimiento" id="birthdayForm">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label fs-5 fw-semibold">Dirección*</label>
+                        <div class="row">
+                            <div class="col mb-2 fs-6">
+                                <label for="streetForm" class="form-label">Calle</label>
+                                <input type="text" class="form-control" id="streetForm" name="calle"
+                                       placeholder="Av. Medrano"
+                                       required>
+                                <input type="hidden" class="form-control" name="calle" value="Calle donde se encuentra la vivienda">
+                            </div>
+                            <div class="col mb-2 fs-6">
+                                <label for="streeNumbertForm" class="form-label">Altura</label>
+                                <input type="number" class="form-control" id="streeNumbertForm" name="altura"
+                                       placeholder="951"
+                                       required>
+                                <input type="hidden" class="form-control" name="altura" value="Altura de la calle de la vivienda">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2 fs-6">
+                                <label for="floorForm" class="form-label">Piso/Depto</label>
+                                <input type="text" class="form-control" id="floorForm" name="pisoDto" placeholder="PB">
+                                <input type="hidden" class="form-control" name="pisoDto"
+                                       value="Piso o departamento de la vivienda">
+                            </div>
+                            <div class="col mb-2 fs-6">
+                                <label for="postalCodeForm" class="form-label">Código postal</label>
+                                <input type="number" class="form-control" id="postalCodeForm" name="codigoPostal"
+                                       placeholder="1173">
+                                <input type="hidden" class="form-control" name="codigoPostal" value="Codigo postal">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2">
+                                <label class="form-label">Tipo documento*</label>
+                                <select class="form-select" name="tipoDocumento" aria-label="Tipo documento" required>
+                                    <option selected>Seleccioná una opción</option>
+                                    {{#each tiposDocumento}}
+                                        <option value="{{this}}">{{this}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="col mb-2 fs-6">
+                                <label for="nroDocumento" class="form-label">Nro doumento*</label>
+                                <input type="number" class="form-control" id="nroDocumento" name="nroDocumento"
+                                       placeholder="20123456"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2 fs-6">
+                                <label for="nroTarjeta" class="form-label">Número de tarjeta*</label>
+                                <input type="number" class="form-control" id="nroTarjeta" name="nroTarjeta"
+                                       placeholder="12345678"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="modalChildList" class="list-group hidden">
+                </div>
+                <div class="d-flex justify-content-center align-items-center m-5">
+                    <button class="btn btn-lng boton-consulta" type="submit">Contribuir
+                    </button>
+                </div>
+            </form>
+
+            <div class="container col-md-6 d-flex align-items-center justify-content-center">
+                <div class="text-center">
+                    <h3 class="mb-4">¡No te olvides de agregar a los menores que tiene a cargo esta persona!</h3>
+
+                    <button id="addMinorBtn" class="btn btn-primary btn-lng boton-confirmacion mb-2">Agregar menor a
+                        cargo
+                    </button>
+                    <div id="minorList" class="list-group">
+                    </div>
+                    <div class="card m-4">
+                        <h5 class="text-center card-title m-0 py-2"><strong> Gracias por tu contribución.</strong></h5>
+                        <div class="container-texto text-center align-items-center  card-body ">
+                            <p class="">
+                                Tu acción ha sido registrada y contribuirá al apoyo de personas en situaciones vulnerables.
+                                <br></br><strong>Tu colaboración es muy valiosa</strong> para continuar ayudando a quienes lo necesitan.
+
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modals-alert"
+         class="modal modal-blur fade"
+         style="display: none"
+         aria-hidden="false"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        document.body.addEventListener('htmx:beforeSwap', function (evt) {
+            if (evt.detail.xhr.status === 409 || evt.detail.xhr.status === 422 || evt.detail.xhr.status === 400) {
+                evt.detail.shouldSwap = true;
+                evt.detail.isError = false;
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('htmx:afterSwap', function (event) {
+            if (event.detail.target.id === 'modals-alert') {
+                var modal = new bootstrap.Modal(document.getElementById('modals-alert'), {});
+                modal.show();
+            }
+        });
+    </script>
+    <script id="document-types-data" type="application/json">{{{json tiposDocumento}}}</script>
+    <script src="/js/registroPersonaVulnerable.js"></script>
+{{/partial}}
+
+{{#partial "header-izquierdo"}}
+    <li class="nav-item">
+        <a class="nav-link  py-0" href="/preguntasFrecuentes">Preguntas Frecuentes</a>
+    </li>
+{{/partial}}
+
+{{> templates/base}}

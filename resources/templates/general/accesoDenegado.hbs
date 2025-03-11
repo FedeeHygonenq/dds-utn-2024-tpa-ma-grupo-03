@@ -1,0 +1,15 @@
+{{#partial "contenido"}}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="alert alert-danger text-center" role="alert">
+                    <h4 class="alert-heading">Acceso denegado!</h4>
+                    <p>Para acceder a esta sección debe <strong>iniciar sesión</strong> primero.</p>
+                    <a class="btn btn-primary" href="/login{{redirect}}" role="button">Iniciar sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/partial}}
+
+{{> templates/base}}

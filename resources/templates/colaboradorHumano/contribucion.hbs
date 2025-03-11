@@ -1,0 +1,269 @@
+<div class="col-md-6">
+    <div class="p-3">
+        <label for="formaContribucion" class="form-label p-2"> Forma de contribución* </label>
+        <select id="formaContribucion" class="form-select" onchange="mostrarFormulario(), calcularPuntos()" required>
+            <option selected disabled>Seleccioná una opción</option>
+            <option value="dinero">Colaborar con dinero</option>
+            <option value="vianda">Colaborar con viandas</option>
+            <option value="distribucion">Colaborar distribuyendo viandas</option>
+            <option value="personaVulnerable">Colaborar registrando a una persona en situacion vulnerable</option>
+        </select>
+    </div>
+    <form class="" id="contribucionDineroForm" style="display: none;" hx-post="/colaborador/contribuir"
+          hx-target="#modals-alert">
+        <div class="p-3">
+            <label for="CantidadADonar" class="form-label">Cantidad a donar</label>
+            <input type="number" class="form-control " id="CantidadADonar" name="cantidadADonar"
+                   placeholder="Ingrese la cantidad a donar" onchange=calcularPuntosDinero()>
+        </div>
+        <div class="p-3">
+            <label for="frecuencia" class="form-label ">Frecuencia de donación </label>
+            <input type="number" class="form-control" id="frecuencia" name="frecuencia"
+                   placeholder="Ingrese cada cuantos días hara una donación" min=1>
+        </div>
+        <input type="text" name="formaContribucion" value="dinero" style="display: none;">
+    </form>
+    <form class="" id="contribucionViandaForm" style="display: none;" hx-post="/colaborador/contribuir"
+          hx-target="#modals-alert">
+        <div class="p-3">
+            <label for="vianda" class="form-label ">Descripción de la vianda</label>
+            <input type="text" class="form-control " id="vianda" name="vianda"
+                   placeholder="Ensalada rusa">
+        </div>
+        <div class="p-3">
+            <label for="heladeraDestinoDonacion" class="form-label">Heladera donde dono la vianda</label>
+            <select class="form-select" id="heladeraDestinoDonacion" name="heladeraDestino">
+                <option selected>Seleccioná una opción</option>
+                {{#each heladeras}}
+                    <option value="{{this.id}}">{{this.puntoEstrategico.nombre}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="p-3">
+            <label for="fechaCaducidad" class="form-label">Fecha de caducidad </label>
+            <input type="date" class="form-control" id="fechaCaducidad" name="fechaCaducidad"
+                   placeholder="Ingrese cuando es la fecha de caducidad de la vianda">
+        </div>
+        <div class="p-3">
+            <label for="calorias" class="form-label ">Calorias (en kcal)</label>
+            <input type="number" class="form-control" id="calorias" name="calorias"
+                   placeholder="Ingrese la cantidad de calorias que tiene la vianda" min=1>
+        </div>
+        <div class="p-3">
+            <label for="pesoVianda" class="form-label ">Peso de la vianda (en kilogramos)</label>
+            <input type="number" class="form-control" id="pesoVianda" name="pesoVianda"
+                   placeholder="Ingrese el peso que tiene la vianda" min=0 step="0.01">
+        </div>
+        <div class="p-3">
+            <label for="codigoContribucion" class="form-label ">Código de contribución</label>
+            <input type="text" class="form-control" id="codigoContribucion" name="codigoContribucion"
+                   placeholder="Ingrese el código de contribución" required>
+        </div>
+        <input type="text" name="formaContribucion" value="vianda" style="display: none;">
+    </form>
+    <div id="contribucionRegistrarPersona" style="display: none;">
+        <p>Para continuar con esta contribucion seras tendras que dirigirte a otra pagina clickeado el boton que se
+            encuentra a continuación</p>
+        <a href="/signup/personaVulnerable">
+            <button type="button" class="btn btn-outline-primary">Contribuir</button>
+        </a>
+    </div>
+    <form class="" id="contribucionRepartoForm" style="display: none;" hx-post="/colaborador/contribuir"
+          hx-target="#modals-alert">
+        <div class="p-3">
+            <label for="cantViandas" class="form-label ">Cantidad de viandas que distribuyo</label>
+            <input type="number" class="form-control" id="cantViandas" name="cantViandas"
+                   placeholder="Ingrese la cantidad de viandas" min=1 onchange=calcularPorViandasDistribuidas()>
+        </div>
+        <div id="viandasContainer" class="p-3"></div>
+        <div class="p-3">
+            <label for="heladeraOrigen" class="form-label ">Heladera desde donde retiro una
+                vianda/s</label>
+            <select class="form-select" id="heladeraOrigen" name="heladeraOrigen">
+                <option selected>Seleccioná una opción</option>
+                {{#each heladeras}}
+                    <option value="{{this.id}}">{{this.puntoEstrategico.nombre}}</option>
+                {{/each}}
+            </select>
+            {{#each heladeras}}
+                <input type="text" id="heladera-{{this.id}}" value="{{json this.viandas}}" style="display: none;">
+            {{/each}}
+        </div>
+        <div class="p-3">
+            <label for="heladeraDestino" class="form-label">Heladera donde deposito una
+                vianda/s</label>
+            <select class="form-select" id="heladeraDestino" name="heladeraDestino">
+                <option selected>Seleccioná una opción</option>
+                {{#each heladeras}}
+                    <option value="{{this.id}}">{{this.puntoEstrategico.nombre}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="p-3">
+            <label for="motivoDistribucion" class="form-label ">Motivo de la distribución</label>
+            <select class="form-select" id="motivoDistribucion" name="motivoDistribucion">
+                <option selected>Seleccioná una opción</option>
+                {{#each motivosDistribucion}}
+                    <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="p-3">
+            <label for="codigoContribucion" class="form-label ">Código de contribución</label>
+            <input type="text" class="form-control" id="codigoContribucion" name="codigoContribucion"
+                   placeholder="Ingrese el código de contribución" required>
+        </div>
+        <input type="text" name="formaContribucion" value="distribucion" style="display: none;">
+    </form>
+</div>
+
+<script>
+    function mostrarFormulario() {
+        document.getElementById('contribucionViandaForm').style.display = 'none';
+        document.getElementById('contribucionDineroForm').style.display = 'none';
+        document.getElementById('contribucionRepartoForm').style.display = 'none';
+        document.getElementById('contribucionRegistrarPersona').style.display = 'none';
+        document.getElementById('boton-dinero').style.display = 'none';
+        document.getElementById('boton-viandas').style.display = 'none';
+        document.getElementById('boton-distribucion').style.display = 'none';
+
+        var seleccion = document.getElementById('formaContribucion').value;
+
+        if (seleccion === 'dinero') {
+            document.getElementById('contribucionDineroForm').style.display = 'block';
+            document.getElementById('boton-dinero').style.display = 'block';
+        } else if (seleccion === 'vianda') {
+            document.getElementById('contribucionViandaForm').style.display = 'block';
+            document.getElementById('boton-viandas').style.display = 'block';
+        } else if (seleccion === 'personaVulnerable') {
+            document.getElementById('contribucionRegistrarPersona').style.display = 'block';
+
+        } else if (seleccion === 'distribucion') {
+            document.getElementById('contribucionRepartoForm').style.display = 'block';
+            document.getElementById('boton-distribucion').style.display = 'block';
+        }
+    }
+</script>
+
+<script>
+    // Obtener la fecha actual
+    var hoy = new Date();
+    var dia = String(hoy.getDate()).padStart(2, '0');
+    var mes = String(hoy.getMonth() + 1).padStart(2, '0'); // Enero es 0
+    var anio = hoy.getFullYear();
+
+    // Formato YYYY-MM-DD
+    var fechaMinima = anio + '-' + mes + '-' + dia;
+
+    // Asignar la fecha mínima al input
+    document.getElementById('fechaCaducidad').setAttribute('min', fechaMinima);
+</script>
+<script>
+    // Calcular dinero actual
+    function dinero() {
+        document.getElementById('')
+    }
+
+    function calcularPuntosDinero() {
+        let contribucion_form = document.getElementById('CantidadADonar').value;
+        let puntosAcumulados = document.getElementById('puntosAcumulados');
+        //setea el valor
+        var puntos = ((contribucion_form) * multiplicadorDinero);
+        puntosAcumulados.textContent = puntos.toString();
+    }
+
+    function mostrarRegistroVulnerable() {
+        let puntosAcumulados = document.getElementById('puntosAcumulados');
+        //se puede donar de a una vianda de momento..
+        puntosAcumulados.textContent = "cada registro se multiplicara por " + multiplicadorEntregaTarjeta.toString();
+    }
+
+    function calcularPorViandasDonadas() {
+        let puntosAcumulados = document.getElementById('puntosAcumulados');
+        //se puede donar de a una vianda de momento..
+        puntosAcumulados.textContent = multiplicadorViandasDonadas.toString();
+
+    }
+
+    function calcularPorViandasDistribuidas() {
+        let cantidad = document.getElementById('cantViandas').value;
+        let puntosAcumulados = document.getElementById('puntosAcumulados');
+        let puntos = cantidad * multiplicadorViandasDistribuidas;
+        puntosAcumulados.textContent = puntos.toString();
+
+
+        // Obtener el contenedor de viandas
+        var container = document.getElementById('viandasContainer');
+
+        // Limpiar el contenedor
+        container.innerHTML = '';
+
+        // Validar que la cantidad sea un número positivo
+        if (cantidad > 0) {
+            // Insertar tantos divs como cantidad de viandas
+            for (var i = 1; i <= cantidad; i++) {
+                // Crear un nuevo div
+                var div = document.createElement('div');
+                div.className = 'p-3';
+
+                // Crear un label
+                var label = document.createElement('label');
+                label.className = 'form-label';
+                label.setAttribute('for', 'viandaSelect-' + i);
+                label.textContent = 'Vianda ' + i;
+
+                // Crear un select
+                var select = document.createElement('select');
+                select.className = 'form-select';
+                select.id = 'viandaSelect-' + i;
+                select.name = 'vianda';
+
+                // Crear una opción por defecto
+                var defaultOption = document.createElement('option');
+                defaultOption.selected = true;
+                defaultOption.textContent = 'Seleccioná una opción';
+                select.appendChild(defaultOption);
+
+                // Insertar el label y el select en el div
+                div.appendChild(label);
+                div.appendChild(select);
+
+                // Insertar el div en el contenedor
+                container.appendChild(div);
+            }
+        }
+    }
+
+    function calcularPuntos() {
+        let elemento = document.getElementById('formaContribucion').value;
+        const puntosAcumulados = document.getElementById('puntosAcumulados');
+        if (elemento === "dinero") puntosAcumulados.textContent = "";
+        if (elemento === "vianda") calcularPorViandasDonadas();
+        if (elemento === "distribucion") puntosAcumulados.textContent = "";
+        if (elemento === "personaVulnerable") mostrarRegistroVulnerable();
+
+    }
+
+    window.onload = function () {
+        document.getElementById('heladeraOrigen').addEventListener('change', function () {
+            var heladeraId = this.value;
+            var viandasInput = document.getElementById('heladera-' + heladeraId);
+            let cantidadViandas = document.getElementById('cantViandas').value;
+
+            if (viandasInput) {
+                var viandas = JSON.parse(viandasInput.value);
+                for (var i = 1; i <= cantidadViandas; i++) {
+                    var viandaSelect = document.getElementById('viandaSelect-' + i);
+                    viandaSelect.innerHTML = '<option selected>Seleccioná una opción</option>';
+                    viandas.forEach(function (vianda) {
+                        var option = document.createElement('option');
+                        option.value = vianda.id;
+                        option.textContent = vianda.comida;
+                        viandaSelect.appendChild(option);
+                    });
+                }
+            }
+        });
+    };
+
+</script>

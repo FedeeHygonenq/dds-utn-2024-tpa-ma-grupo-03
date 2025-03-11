@@ -1,0 +1,14 @@
+
+.contenedor-opciones{
+    height: 50vh;
+}
+
+#map {
+    width: 95%;
+    height: 50vh; /* La altura será la mitad de la altura de la ventana */
+    margin-bottom: 20px; /* Espacio debajo del mapa */
+
+}
+
+
+

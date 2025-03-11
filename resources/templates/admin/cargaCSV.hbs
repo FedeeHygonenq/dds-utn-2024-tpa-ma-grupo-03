@@ -1,0 +1,84 @@
+{{#block "links-header"}}
+    <link rel="stylesheet" href="/css/cargaCSV.css">
+{{/block}}
+
+{{> templates/partials/headerUsuario }}
+
+{{#partial "header-izquierdo"}}
+    <li class="nav-item">
+        <a class="nav-link active py-0" href="/home">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link  py-0" href="/preguntasFrecuentes" target="_self">Preguntas Frecuentes</a>
+    </li>
+{{/partial}}
+
+{{#partial "contenido"}}
+    <h1 class="titulo">Cargar archivo CSV</h1>
+    <div class="container-fluid container-formulario d-flex justify-content-center align-items-center">
+        <div class="row w-100">
+            <!-- Formulario para subir archivo CSV -->
+            <form class="text-center form-core" id="contribucionForm"
+                  onsubmit="return mostrarMensaje()"
+                  hx-post="/colaboradores/cargarCSV"
+                  hx-target="#result-message"
+                  enctype="multipart/form-data">
+                <!-- Texto centrado -->
+                <div class="p-3">
+                    <p class="texto">Seleccione un archivo CSV para<br> cargar las colaboraciones al sistema.</p>
+                </div>
+                <!-- Botón de carga de archivo -->
+                <div class="input-group justify-content-center archivo">
+                    <input type="file" class="form-control" id="subirArchivo" name="archivoCSV" accept=".csv" required>
+                </div>
+                <button type="submit" class="px-5 py-2 fs-3 m-3 boton-csv btn btn-primary">
+                    Subir
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <div class="alert alert-success" id="mensajeConfirmacion" role="alert" style="display: none;">
+            <p class="alert-heading text-center" id="textoMensaje"></p>
+        </div>
+    </div>
+    <!-- Contenedor para el mensaje de resultado -->
+    <div class="container" id="result-message"></div>
+
+    <script>
+
+        document.body.addEventListener('htmx:beforeSwap', function (evt) {
+            if (evt.detail.xhr.status === 400 || evt.detail.xhr.status === 401 || evt.detail.xhr.status === 409
+                    || evt.detail.xhr.status === 415 || evt.detail.xhr.status === 422) {
+                evt.detail.shouldSwap = true;
+                evt.detail.isError = false;
+            }
+        });
+
+        document.getElementById('contribucionForm').addEventListener('submit', function (event) {
+            const fileInput = document.getElementById('subirArchivo');
+            const filePath = fileInput.value;
+
+            // Verificar si el archivo tiene la extensión .csv
+            if (!filePath.toLowerCase().endsWith('.csv')) {
+                event.preventDefault(); // Evita que el formulario se envíe
+                alert('¡El archivo debe ser del tipo .csv!');
+            }
+        });
+
+
+        function mostrarMensaje() {
+            // Actualiza el contenido del párrafo dentro de la alerta
+            document.getElementById('textoMensaje').textContent =
+                    'Se cargó el archivo y será procesado en breves. Puedes esperar en esta pantalla para saber el resultado.';
+
+            // Muestra la alerta completa
+            document.getElementById('mensajeConfirmacion').style.display = 'block';
+
+            // Retorna `true` para que el formulario se envíe correctamente
+            return true;
+        }
+    </script>
+{{/partial}}
+
+{{> templates/base}}

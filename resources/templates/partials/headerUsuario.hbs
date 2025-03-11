@@ -1,0 +1,19 @@
+{{#partial "header-derecho"}}
+    <div class="nav-item dropdown col-lg-auto ms-auto">
+        <a class="nav-link py-0 d-none d-lg-block dropdown-toggle" href="#" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            Mi cuenta <i class="bi bi-person-circle fs-3"></i>
+        </a>
+        <a class="nav-link py-0 d-lg-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false">
+            Mi cuenta
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <form action="/logout" method="POST" style="display: inline;">
+                    <button type="submit" class="btn btn-link">Cerrar sesión</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+{{/partial}}

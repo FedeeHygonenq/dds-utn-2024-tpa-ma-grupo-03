@@ -1,0 +1,85 @@
+{{#partial "links-header"}}
+    <link rel="stylesheet" href="css/catalogo.css">
+{{/partial}}
+
+
+{{> templates/partials/headerUsuario}}
+
+
+{{#partial "header-izquierdo"}}
+    {{> templates/general/headerIzquierdo }}
+{{/partial}}
+
+{{#partial "contenido"}}
+    <h1 class="text-center pt-4 fw-bolder">Consultas de Heladeras <i class="bi bi-gear-wide-connected"></i></h1>
+    <div class="container container-formulario justify-content-center align-items-center">
+        <div class="row">
+
+            <form class="col-md-6 mb-4" id="heladerasForm" name="heladerasForm" hx-post="/accion/heladera/consultas"
+                  hx-target="#mensaje">
+                <div class="p-4">
+                    <label for="heladera" class="form-label">Seleccioná una Heladera*</label>
+                    <select name="heladera" class="form-select" aria-label="Selecciona una Heladera" required>
+                        {{#if heladeras.length}}
+                            <option selected disabled value="">Seleccioná una opción</option>
+                            {{#each heladeras}}
+                                <option value="{{this.id}}">{{this.puntoEstrategico.nombre}}</option>
+                            {{/each}}
+                        {{else}}
+                            <option value="null">No hay heladeras disponibles</option>
+                        {{/if}}
+                    </select>
+                </div>
+
+                <div class="p-4">
+                    <label for="tipoConsulta" class="form-label">Tipo de consulta*</label>
+                    <select id="tipoConsulta" name="tipoConsulta" class="form-select" aria-label="Tipo de consulta"
+                            required onchange="cambiarMensaje()">
+                        <!-- Select para seleccionar el tipo de consulta -->
+                        <option selected disabled value="">Selecciona un tipo de consulta</option>
+                        <option value="General">General</option>
+                        <option value="Tecnica">Técnica</option>
+                        <option value="Fallas y reparaciones">Fallas y reparaciones</option>
+                    </select>
+                </div>
+            </form>
+
+            <div class="col-md-6">
+                <div data-bs-root-margin="0px 0px -40%" data-bs-spy="scroll" class="card p-0 scrollspy-example"
+                     data-bs-smooth-scroll="true" tabindex="0">
+                    <p class="text-center card-title m-0 p-2"><strong>Los datos a consultar aparecerán acá</strong></p>
+                    <div class="container-texto text-center align-items-center p-1 card-body"
+                         style="max-height: 300px; overflow-y: auto;">
+                        <p id="mensaje" class=""></p>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center align-items-center m-5">
+                    <button class="btn btn-primary boton-consulta" form="heladerasForm" type="submit">Consultar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function cambiarMensaje() {
+            const tipoConsulta = document.getElementById('tipoConsulta').value;
+            const mensajeConsulta = document.getElementById('mensaje');
+
+            if (tipoConsulta === "Tecnica") {
+                mensajeConsulta.textContent = "Has seleccionado una consulta general." +
+                        " Los datos a consultar son Temperatura maxima y minima, Estado de heladera y capacidad";
+            } else if (tipoConsulta === "General") {
+                mensajeConsulta.textContent = "Has seleccionado una consulta técnica." +
+                        " Los datos a consultar son Ubicacion y viandas que se encuentran dentro de la heladera";
+            } else if (tipoConsulta === "Fallas y reparaciones") {
+                mensajeConsulta.textContent = "Has seleccionado una consulta técnica." +
+                        " Los datos a consultar son los reportes de fallas y de reparaciones";
+            } else {
+                mensajeConsulta.textContent = ""; // Limpia el mensaje si no hay selección
+            }
+        }
+    </script>
+{{/partial}}
+
+{{> templates/base}}

@@ -1,0 +1,28 @@
+<script>
+    var puntosRecomendados = [
+        {{#each puntosRecomendados}}
+            {
+                "first": {
+                    "latitud": {{this.direccion.latitud}},
+                    "longitud": {{this.direccion.longitud}}
+                },
+                "second": "{{this.descripcion}}"
+            }
+            {{#unless @last}},{{/unless}}
+        {{/each}}
+    ];
+
+
+    puntosRecomendados.forEach(punto => {
+        var marker = L.marker([punto.first.latitud, punto.first.longitud])
+                .addTo(map);
+
+        marker._icon.classList.add("huechange");
+        marker.bindPopup(`<b>${punto.second}</b>`)
+                .openPopup()
+                .on('click', () => {
+                    const inputDireccion = document.getElementById('direccion');
+                    inputDireccion.value = `${punto.second}`;
+                });
+    });
+</script>

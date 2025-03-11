@@ -1,0 +1,83 @@
+{{#block "links-header"}}
+    <link rel="stylesheet" href="/css/catalogo.css">
+{{/block}}
+
+{{> templates/partials/headerUsuario }}
+
+{{#partial "header-izquierdo"}}
+    {{> templates/general/headerIzquierdo }}
+{{/partial}}
+
+{{#partial "contenido"}}
+    {{#if canjes}}
+        <h4 class="text-center pt-4 fw-bolder">Mis canjes</h4>
+        {{#each canjes}}
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card m-auto my-2 elemento-catalogo">
+                    <img src="/{{this.ofertaCanjeada.rutaImagen}}" class="card-img-top" alt="foto">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.ofertaCanjeada.nombre}}</h5>
+                        {{#each this.items}}
+                            <p class="card-text">{{this.ofertaCanjeada.descripcion}}
+                                X{{this.ofertaCanjeada.cantidad}}</p>
+                        {{/each}}
+                        <p class="card-text">Puntos: {{this.ofertaCanjeada.precio}}</p>
+                        <p id="fecha-completa" style="display: none">{{this.fecha}}</p>
+                        <p> Fecha cuando se canjeo: <p id="fecha-sola"></p></p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        <h3 class="text-center">Todavia no realizaste ningun canje</h3>
+    {{/if}}
+    <div class="d-flex justify-content-center">
+        <a href="/catalogo">
+            <button type="button" class="btn btn-primary">Volver al catalogo</button>
+        </a>
+    </div>
+    <div id="modals-alert"
+         class="modal modal-blur fade"
+         style="display: none"
+         aria-hidden="false"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        document.body.addEventListener('htmx:beforeSwap', function (evt) {
+            if (evt.detail.xhr.status === 409 || evt.detail.xhr.status === 422 || evt.detail.xhr.status === 402) {
+                evt.detail.shouldSwap = true;
+                evt.detail.isError = false;
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('htmx:afterSwap', function (event) {
+            if (event.detail.target.id === 'modals-alert') {
+                var modal = new bootstrap.Modal(document.getElementById('modals-alert'), {});
+                modal.show();
+            }
+        });
+
+
+        // Espera a que la página cargue
+        window.onload = function () {
+            // Obtén la fecha renderizada por Handlebars
+            let dateTimeString = document.getElementById("fecha-completa").innerText;
+
+            // Usa split para obtener solo la parte de la fecha
+            let dateOnly = dateTimeString.split('T')[0];
+
+            // Muestra solo la fecha en otro elemento
+            document.getElementById("fecha-sola").innerText = dateOnly;
+        };
+
+    </script>
+
+{{/partial}}
+
+{{> templates/base }}

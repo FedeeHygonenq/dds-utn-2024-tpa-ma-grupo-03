@@ -1,0 +1,157 @@
+{{#block "links-header"}}
+    <link rel="stylesheet" href="/css/mapa.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+{{/block}}
+
+{{#partial "header-derecho"}}
+    {{> templates/partials/headerUsuario }}
+{{/partial}}
+
+{{#partial "header-izquierdo"}}
+    <li class="nav-item">
+        <a class="nav-link active py-0" href="/home">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link  py-0" href="/preguntasFrecuentes" target="_self">Preguntas Frecuentes</a>
+    </li>
+{{/partial}}
+
+{{#partial "contenido"}}
+    <h1 class="text-center m-3"> Suscripción a heladeras </h1>
+    <form hx-post="/suscribir/heladera" hx-target="#modals-alert">
+        <div class="row justify-content-center align-items-start m-2">
+            <div class="col-sm-7 m-3">
+                <label for="puntoCentral" class="form-label">Punto central</label>
+                <input type="text" class="form-control" id="puntoCentral" name="puntoCentral"
+                       placeholder="Av. Santa Fe 1000" required>
+
+                <div class="contenedor-map container-fluid col-sm">
+                    <div id="map" class="m-3 "></div>
+                </div>
+            </div>
+            <div class="col-sm m-3 ">
+
+                <label for="kmALaRedonda" class="form-label">Km a la redonda</label>
+                <input type="number" class="form-control" name="kmALaRedonda" id="kmALaRedonda" placeholder="10"
+                       required>
+                <div class="contenedor-opciones d-flex justify-content-center align-items-center  ">
+                    <div class="card p-0 m-0 w-75">
+                        <div class="text-center card-header p-0 m-0">
+                            <h4>Selecciona sobre que te gustaría enterarte</h4>
+                        </div>
+                        <div id="dynamic-inputs" class=" card-body ">
+                            <ul>
+                                <li class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="quedanViandas"
+                                           id="quedanViandas">
+                                    <label class="form-check-label" for="quedanViandas">
+                                        Quedan N viandas para vaciarse
+                                    </label>
+                                    <input type="number" class="form-control" name="numeroQuedanViandas"
+                                           id="numeroQuedanViandas"
+                                           placeholder="0"
+                                           style="display: none"
+                                           min=1>
+                                </li>
+                                <li class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="faltanViandas"
+                                           id="faltanViandas">
+                                    <label class="form-check-label" for="faltanViandas">
+                                        Faltan N viandas para llenarse
+                                    </label>
+                                    <input type="number" class="form-control" name="numeroFaltanViandas"
+                                           id="numeroFaltanViandas"
+                                           placeholder="0"
+                                           style="display: none"
+                                           min=1>
+                                </li>
+                                <li class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="desperfecto" id="desperfecto">
+                                    <label class="form-check-label" for="desperfecto">
+                                        Desperfecto en la heladera
+                                    </label>
+                                </li>
+                            </ul>
+
+                            <button type="submit" class="btn btn-primary mt-4 container-fluid">Suscribir</button>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const quedanViandasCheckbox = document.getElementById('quedanViandas');
+                                    const faltanViandasCheckbox = document.getElementById('faltanViandas');
+                                    const numeroQuedanViandasInput = document.getElementById('numeroQuedanViandas');
+                                    const numeroFaltanViandasInput = document.getElementById('numeroFaltanViandas');
+
+
+                                    quedanViandasCheckbox.addEventListener('change', function () {
+                                        numeroQuedanViandasInput.style.display = quedanViandasCheckbox.checked ? 'block' : 'none';
+                                        numeroQuedanViandasInput.value = quedanViandasCheckbox.checked ? '1' : '';
+                                    });
+
+                                    faltanViandasCheckbox.addEventListener('change', function () {
+                                        numeroFaltanViandasInput.style.display = faltanViandasCheckbox.checked ? 'block' : 'none';
+                                        numeroFaltanViandasInput.value = faltanViandasCheckbox.checked ? '1' : '';
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div id="modals-alert"
+         class="modal modal-blur fade"
+         style="display: none"
+         aria-hidden="false"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        document.body.addEventListener('htmx:beforeSwap', function (evt) {
+            if (evt.detail.xhr.status === 409 || evt.detail.xhr.status === 422 || evt.detail.xhr.status === 400) {
+                evt.detail.shouldSwap = true;
+                evt.detail.isError = false;
+            }
+        });
+        document.addEventListener('htmx:afterSwap', function (event) {
+            if (event.detail.target.id === 'modals-alert') {
+                var modal = new bootstrap.Modal(document.getElementById('modals-alert'), {});
+                modal.show();
+            }
+        });
+    </script>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Lista de ubicaciones con coordenadas
+        const locations = JSON.parse('{{{json puntosHeladera}}}');
+
+        function initMap() {
+            // Inicializar el mapa centrado en la primera ubicación
+            const map = L.map('map').setView([locations[0].direccion.latitud, locations[0].direccion.longitud], 10);
+
+            // Cargar las capas de OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Agregar marcadores por cada ubicación
+            locations.forEach(location => {
+                L.marker([location.direccion.latitud, location.direccion.longitud])
+                        .addTo(map)
+                        .bindPopup(`<b>${location.nombre}</b>`);  // Texto que aparece al hacer clic en el marcador
+            });
+        }
+
+        // Inicializar el mapa cuando la página cargue
+        window.onload = initMap;
+
+    </script>
+{{/partial}}
+
+
+{{> templates/base}}

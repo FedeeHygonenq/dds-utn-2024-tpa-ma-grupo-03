@@ -1,0 +1,80 @@
+{{#block "links-header"}}
+    <link rel="stylesheet" href="/css/login.css">
+{{/block}}
+
+{{#partial "header-izquierdo"}}
+    <li class="nav-item">
+        <a class="nav-link  py-0" href="/preguntasFrecuentes" target="_self">Preguntas Frecuentes</a>
+    </li>
+{{/partial}}
+
+{{#partial "contenido"}}
+        <div class="container py-5">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-2-strong">
+                        <form hx-post="/login" hx-target="#modals-alert" class="card-body p-5 text-center">
+                            <input type="hidden" name="redirect" value="{{redirect}}">
+                            <i class="bi bi-person fs-1"></i>
+                            <h3 class="mb-5">Inicio de Sesión</h3>
+
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="typeEmailX-2">Usuario</label>
+                                <input required type="text" id="typeEmailX-2" name="idUsuario"
+                                       class="form-control form-control-lg"/>
+                            </div>
+
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="typePasswordX-2">Contraseña</label>
+                                <input required type="password" id="typePasswordX-2" name="contrasenia"
+                                       class="form-control form-control-lg"/>
+                            </div>
+
+                            <!-- Checkbox -->
+                            <div class="form-check d-flex justify-content-center mb-4">
+                                <input class="form-check-input" type="checkbox" value="" id="form1Example3"/>
+                                <label class="form-check-label" for="form1Example3"> Recordar contraseña </label>
+                            </div>
+
+                            <button data-mdb-button-init data-mdb-ripple-init
+                                    class="btn btn-primary btn-lg btn-block" type="submit">Login
+                            </button>
+
+                            <hr class="my-4">
+
+                            <p> ¿Todavía no tenés cuenta? <a class="link-register" href="/signup"> Registrarse</a></p>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="modals-alert"
+             class="modal modal-blur fade"
+             style="display: none"
+             aria-hidden="false"
+             tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content"></div>
+            </div>
+        </div>
+
+        <script>
+            document.body.addEventListener('htmx:beforeSwap', function (evt) {
+                if (evt.detail.xhr.status === 409 || evt.detail.xhr.status === 422 || evt.detail.xhr.status === 401 || evt.detail.xhr.status === 400 || evt.detail.xhr.status === 402) {
+                    evt.detail.shouldSwap = true;
+                    evt.detail.isError = false;
+                }
+            });
+
+            document.addEventListener('htmx:afterSwap', function (event) {
+                if (event.detail.target.id === 'modals-alert') {
+                    var modal = new bootstrap.Modal(document.getElementById('modals-alert'), {});
+                    modal.show();
+                }
+            });
+        </script>
+{{/partial}}
+
+{{> templates/base}}

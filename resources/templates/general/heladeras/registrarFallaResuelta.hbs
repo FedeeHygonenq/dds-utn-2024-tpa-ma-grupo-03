@@ -1,0 +1,40 @@
+<form class="col-md mb-3" hx-post="/reporte/tecnico" hx-target="#modals-alert" enctype="multipart/form-data">
+    <div class="p-4 col-md mb-3">
+        <label for="heladera" class="form-label"> Heladera afectada</label>
+        <select id="heladera" class="form-select" aria-label="Selecciona una Heladera"  name="heladera" required>
+            <option selected disabled id="" name="heladera">Seleccioná una opción</option>
+            {{#if heladeras.length}}
+                {{#each heladeras}}
+                    <option value="{{this.id}}">{{this.puntoEstrategico.nombre}} Estado: {{this.estado}}</option>
+                {{/each}}
+            {{else}}
+                <option disabled>No hay heladeras disponibles</option>
+            {{/if}}
+        </select>
+        <label for="estadoHeladera" class="form-label"> Estado actual de la Heladera</label>
+        <select id="estadoHeladera" class="form-select" aria-label="Selecciona el Estado actual de la Heladera" name="estadoHeladera" required>
+            <option selected disabled id="" name="estadoHeladera">Seleccioná una opción</option>
+            {{#each estados}}
+                <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+        <div class="p-4">
+            <label for="birthdayForm" class="form-label">Fecha de trabajo</label>
+            <input type="date" class="form-control" id="birthdayForm" name="fechaTrabajo">
+        </div>
+        <div class="col-md contribucionForm reporte-archivo my-4">
+            <input type="file" class="form-control" name="reporteArchivo"
+                   aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*" required>
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div data-bs-root-margin="0px 0px -40%" data-bs-spy="scroll"
+             class="card p-0 scrollspy-example"
+             data-bs-smooth-scroll="true" tabindex="0">
+            <p class="text-center card-title m-0 p-2"><strong>Descripción trabajo</strong></p>
+            <div class="mb-3  card-body">
+                <label for="descripcion" class="form-label">Escribí una descripción de lo trabajado</label>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+            </div>
+        </div>

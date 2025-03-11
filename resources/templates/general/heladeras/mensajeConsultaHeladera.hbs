@@ -1,0 +1,118 @@
+<p>
+{{#if ubicacion}}
+        Ubicacion: {{ubicacion}}<br>
+    {{#if viandas}}
+            Viandas que se encuentran en la heladera:<br>
+        {{#each viandas}}
+                - {{this.comida}}<br>
+        {{/each}}
+    {{else}}
+            No hay viandas en la heladera
+    {{/if}}
+{{else if tempMaxima}}
+        Los datos de la healdera son los siguientes:<br>
+        - Temperatura maxima: {{tempMaxima}} °C<br>
+        - Temperatura minima: {{tempMinima}} °C<br>
+        - Estado de la heladera: {{estado}}<br>
+        - Capacidad de la heladera: {{capacidad}}<br>
+{{/if}}
+{{#if registrosIncidentes}}
+        Registros de inicidentes:
+    {{#each registrosIncidentes}}
+            <li class="list-group-item d-flex align-items-center">
+                <a class="link-color" data-bs-toggle="modal" data-bs-target="#reporteModal"
+                   onclick="mostrarReporte({{json this.fecha}})">
+                    Reporte-{{this.fecha}}-{{this.incidente}}
+                </a>
+            </li>
+    {{/each}}
+    <div class="modal fade text-center" id="reporteModal" tabindex="-1" aria-labelledby="reporteModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reporteModalLabel">Reporte</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="reporteContenido">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function mostrarReporte(fecha) {
+            const reporteContenido = document.getElementById('reporteContenido');
+            const reporte = JSON.parse('{{{json registrosIncidentes}}}');
+            const index = reporte.findIndex(r => r.fecha === fecha);
+            if (index !== -1) {
+                reporteContenido.innerHTML = `
+            <strong>Descripción:</strong> ${reporte[index].descripcion}<br>
+            <p>Detalles adicionales del incidente:</p>
+            <ul class="p-0">
+                <li>Persona que lo reporto ${reporte[index].colaboradorQueReporto}</li>
+                <li>Tipo de inicidente: ${reporte[index].incidente}</li>
+            </ul>
+            <p>Imagen del incidente:</p>
+            <div>
+            <img src="/${reporte[index].pathFoto}" alt="Imagen del incidente" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+        `;
+            }
+        }
+    </script>
+{{else}}
+    <p>No hay registros de incidentes </p>
+{{/if}}
+{{#if reparaciones}}
+    Registros de reparaciones:
+    {{#each reparaciones}}
+        <li class="list-group-item d-flex align-items-center">
+            <a class="link-color" data-bs-toggle="modal" data-bs-target="#reparacionModal"
+               onclick="mostrarReparacion({{json this.fechaVisita}})">
+                Reporte-{{this.fechaVisita}}
+            </a>
+        </li>
+    {{/each}}
+    <div class="modal fade" id="reparacionModal" tabindex="-1" aria-labelledby="reparacionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reparacionModalLabel">Reporte</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="reparacionContenido">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function mostrarReparacion(fecha) {
+            const reporteContenido = document.getElementById('reparacionContenido');
+            const reporte = JSON.parse('{{{json reparaciones}}}');
+            const index = reporte.findIndex(r => r.fechaVisita === fecha);
+            if (index !== -1) {
+                // Convertir el booleano a "Sí" o "No"
+                const trabajoTerminadoTexto = reporte[index].trabajoTerminado ? 'Sí' : 'No';
+                reporteContenido.innerHTML = `
+            <strong>Descripción:</strong> ${reporte[index].descripcionTrabajado}<br>
+            <p>Detalles adicionales de la reparacion:</p>
+            <ul class="p-0">
+                <li>Técnico que lo reportó: ${reporte[index].tecnico.nombre} ${reporte[index].tecnico.apellido}</li>
+                <li>Está terminado: ${trabajoTerminadoTexto}</li>
+            </ul>
+            <p>Imagen de la reparación:</p>
+            <div>
+            <img src="/${reporte[index].pathFoto}" alt="Imagen de la reparación" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+        `;
+            }
+        }
+    </script>
+{{else}}
+    <p>No hay registros de reparaciones </p>
+{{/if}}
+</p>

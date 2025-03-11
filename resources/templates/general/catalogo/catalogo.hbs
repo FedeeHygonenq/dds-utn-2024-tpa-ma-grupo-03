@@ -1,0 +1,67 @@
+{{#block "links-header"}}
+    <link rel="stylesheet" href="/css/catalogo.css">
+{{/block}}
+
+{{#partial "header-derecho"}}
+    <div class="card align-self-start justify-self-start card-puntos"><p>Puntos {{this.puntosUsuario}}</p></div>
+    <a href="/catalogo/misCanjes">Ver mis canjes</a>
+{{/partial}}
+
+{{#partial "header-izquierdo"}}
+    {{> templates/general/headerIzquierdo }}
+{{/partial}}
+
+{{#partial "contenido"}}
+    {{#if ofertas}}
+        {{#each ofertas}}
+            <form class="container" id="form-{{this.id}}" hx-post="/catalogo/comprar" hx-target="#modals-alert">
+                <input type="hidden" name="idOferta" value="{{this.id}}">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="card m-auto my-2 elemento-catalogo">
+                        <img src="/{{this.rutaImagen}}" class="card-img-top" alt="foto">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.nombre}}</h5>
+                            {{#each this.items}}
+                                <p class="card-text">{{this.descripcion}} X{{this.cantidad}}</p>
+                            {{/each}}
+                            <p class="card-text">Puntos: {{this.precio}}</p>
+                            <button type="submit" form="form-{{this.id}}" class="btn btn-primary">Canjear</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        {{/each}}
+    {{else}}
+        <h3 class="text-center">No hay ofertas disponibles</h3>
+    {{/if}}
+    <div id="modals-alert"
+         class="modal modal-blur fade"
+         style="display: none"
+         aria-hidden="false"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        document.body.addEventListener('htmx:beforeSwap', function (evt) {
+            if (evt.detail.xhr.status === 409 || evt.detail.xhr.status === 422 || evt.detail.xhr.status === 402) {
+                evt.detail.shouldSwap = true;
+                evt.detail.isError = false;
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('htmx:afterSwap', function (event) {
+            if (event.detail.target.id === 'modals-alert') {
+                var modal = new bootstrap.Modal(document.getElementById('modals-alert'), {});
+                modal.show();
+            }
+        });
+    </script>
+
+{{/partial}}
+
+{{> templates/base }}

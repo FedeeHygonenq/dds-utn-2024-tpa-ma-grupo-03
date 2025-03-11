@@ -1,0 +1,59 @@
+body{
+    font-family: "Montserrat", sans-serif;
+}
+
+main{
+    font-family: "Montserrat", sans-serif;
+}
+nav {
+    background-color: #8ce8d4;
+    font-size: 1.3em;
+    font-family: "Montserrat", sans-serif;
+
+}
+
+.navbar-collapse.collapsing .nav-link,
+.navbar-collapse.collapse.show .nav-link {
+    background-color: #a2ecdc;
+}
+
+.navbar-collapse.collapsing .nav-link,
+.navbar-collapse.collapse.show .nav-link {
+    background-color: #a2ecdc;
+}
+
+.footer{
+    background-color: #067a5c;
+
+}
+
+
+.footer-icon{
+    color: inherit; /* Mantiene el color del texto padre */
+    text-decoration: none; /* Elimina el subrayado */
+}
+
+.content-wrapper{
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
+}
+
+main{
+    background-color: #e5f7f2;
+}
+
+.modal-error .modal-error-content{
+    width: 50em !important;
+}
+
+body p {
+    white-space: pre-line !important;
+}
+
+p {
+    white-space: pre-line !important;
+}
+
+
+

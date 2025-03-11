@@ -1,0 +1,47 @@
+.contenedor-principal{
+    height: 23em !important;
+    background-color: rgba(225, 255, 248, 0.67);
+}
+
+.form-check{
+    margin: 1em;
+    font-size: 1.1em;
+}
+
+.boton-confirmacion{
+    padding: 0.5em 1.5em !important;
+}
+
+.card-header{
+    background-color: #8ce8d4 !important;
+}
+
+.check-confirmacion{
+    align-self: center !important;
+    margin: auto;
+    padding: 1em;
+}
+
+.alert-danger{
+    max-width: 70% !important;
+    align-self: center;
+}
+
+.boton-icono{
+    background-color: #24d79d !important;
+    font-size: 2rem;
+    max-width: 80%
+}
+
+.boton-titulo{
+    font-size: 2rem !important;
+    padding: 2rem 3rem;
+}
+
+.seleccion-accion {
+    height: 60dvh !important;
+    display: flex; /* Enable flexbox layout */
+    align-items: center; /* Center vertically */
+
+}
+

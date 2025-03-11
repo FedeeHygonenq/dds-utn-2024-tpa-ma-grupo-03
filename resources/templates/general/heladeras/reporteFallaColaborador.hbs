@@ -1,0 +1,33 @@
+<form class="col-md mb-3" hx-post="/reporte/fallas/nuevo" hx-target="#modals-alert" enctype="multipart/form-data">
+    <div class="p-4 col-md mb-3">
+        <label for="heladera" class="form-label"> Heladera afectada</label>
+        <select id="heladera" class="form-select" aria-label="Selecciona una Heladera" name="heladera" required>
+            <option selected disabled id="" >Seleccioná una opción</option>
+            {{#if heladeras.length}}
+                {{#each heladeras}}
+                    <option value="{{this.id}}">{{this.puntoEstrategico.nombre}} Estado: {{this.estado}}</option>
+                {{/each}}
+            {{else}}
+                <option disabled>No hay heladeras disponibles</option>
+            {{/if}}
+        </select>
+        <div class="p-4">
+            <label for="fechaFalla" class="form-label">Fecha de falla</label>
+            <input type="date" class="form-control" id="fechaFalla" name="fechaFalla">
+        </div>
+        <div class="col-md contribucionForm reporte-archivo my-4">
+            <input type="file" class="form-control" name="reporteArchivo"
+                   aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*" required>
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div data-bs-root-margin="0px 0px -40%" data-bs-spy="scroll"
+             class="card p-0 scrollspy-example"
+             data-bs-smooth-scroll="true" tabindex="0">
+            <p class="text-center card-title m-0 p-2"><strong>Descripción falla</strong></p>
+            <div class="mb-3  card-body">
+                <label for="exampleFormControlTextarea1" class="form-label">Escribí una descripción de la falla</label>
+                <textarea class="form-control" name="descripcion" rows="3"></textarea>
+            </div>
+        </div>

@@ -1,0 +1,21 @@
+.container-formulario{
+    background-color: rgba(231, 253, 243, 0.58);
+}
+.card-register .card-header-register{
+    color: #066c52;
+    background-color: #a2ecdc;
+    text-align: center;
+}
+
+.card-register .card-body-register{
+    background-color: #fafffe;
+
+}
+
+.card-register .card-body-register .form-check .form-check-input{
+    border-color: #067a5c;
+}
+
+.entry-content{
+    list-style-type: square;
+}

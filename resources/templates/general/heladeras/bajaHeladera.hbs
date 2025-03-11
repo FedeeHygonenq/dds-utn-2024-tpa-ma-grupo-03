@@ -1,0 +1,101 @@
+{{#block "links-header"}}
+    <link rel="stylesheet" href="/css/accionSobreHeladera.css">
+{{/block}}
+
+{{#partial "header-izquierdo"}}
+    {{> templates/general/headerIzquierdo }}
+{{/partial}}
+
+{{#partial "header-derecho"}}
+    {{> templates/partials/headerUsuario}}
+{{/partial}}
+
+<!-- TODO hacer que bajaHeladera interactúe con el back para bajarlo del sistema -->
+
+{{#partial "contenido"}}
+    <div class="container container-formulario  align-items-center">
+        <div class="row justify-content-center mb-5">
+            <h1 class="text-center pt-4 fw-bolder">¿Estas seguro de que querés dar de baja una heladera?</h1>
+        </div>
+        <form class="row justify-content-center align-items-center contenedor-principal m-auto"
+              hx_post="/accion/heladera/baja" hx-target="#modals-alert">
+            <div class="container-sm col-sm">
+                <label for="heladerasDisponibles" class="form-label p-2 fs-3">Heladeras disponibles</label>
+                <select id="heladerasDisponibles" name="heladeraId" class="form-select"
+                        aria-label="Seleccione una heladera" required>
+                    {{#if heladeras.length}}
+                        <option selected disabled value="">Seleccioná una opción</option>
+                        {{#each heladeras}}
+                            <option value="{{this.id}}">{{this.puntoEstrategico.nombre}}</option>
+                        {{/each}}
+                    {{else}}
+                        <option value="null">No hay heladeras disponibles</option>
+                    {{/if}}
+                </select>
+            </div>
+            <div class=" col-sm justify-content-center align-items-center m-auto ">
+                <div class="card justify-content-center m-2">
+                    <h5 class="card-header text-center p-2">¿Estás seguro de que quieres dar de baja esta
+                        heladera?</h5>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class=" form-check check-confirmacion">
+                            <input class="form-check-input" type="radio" name="confirmation" id="yesOption"
+                                   value="Sí"
+                                   required>
+                            <label class="form-check-label" for="yesOption">
+                                Sí
+                            </label>
+                        </div>
+                        <div class=" form-check check-confirmacion">
+                            <input class="form-check-input" type="radio" name="confirmation" id="noOption"
+                                   value="No"
+                                   required>
+                            <label class="form-check-label" for="noOption">
+                                No
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill  me-4"></i>
+                        <div>
+                            Al dar de baja a la heladera ya no podra acceder a ella
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit">
+                        Confirmar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="modals-alert"
+         class="modal modal-blur fade"
+         style="display: none"
+         aria-hidden="false"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        document.body.addEventListener('htmx:beforeSwap', function (evt) {
+            if (evt.detail.xhr.status === 409 || evt.detail.xhr.status === 422 || evt.detail.xhr.status === 400) {
+                evt.detail.shouldSwap = true;
+                evt.detail.isError = false;
+            }
+        });
+        document.addEventListener('htmx:afterSwap', function (event) {
+            if (event.detail.target.id === 'modals-alert') {
+                var modal = new bootstrap.Modal(document.getElementById('modals-alert'), {});
+                modal.show();
+            }
+        });
+    </script>
+{{/partial}}
+
+{{> templates/base}}

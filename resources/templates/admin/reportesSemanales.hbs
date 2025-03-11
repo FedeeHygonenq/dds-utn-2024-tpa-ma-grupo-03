@@ -1,0 +1,147 @@
+{{#block "links-header"}}
+    <link rel="stylesheet" href="/css/reportesSemanales.css">
+{{/block}}
+
+{{> templates/partials/headerUsuario }}
+
+
+{{#partial "header-izquierdo"}}
+    <li class="nav-item">
+        <a class="nav-link active py-0" href="/home">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link  py-0" href="/preguntasFrecuentes" target="_self">Preguntas Frecuentes</a>
+    </li>
+{{/partial}}
+
+{{#partial "contenido"}}
+    <div class="container container-formulario  align-items-center">
+        <h1 class="titulo">Reportes semanales <i class="bi bi-calendar-day-fill"></i></h1>
+        <div class="row justify-content-center mb-2">
+            <form class="text-center " id="pdfCantidadDeFallas, pdfRepartidas, pdfDonadas">
+                <a data-bs-toggle="offcanvas" href="#deslizadorFallas"
+                   class=" btn btn-lng boton">
+                    <img class="icono-reporte mb-2" src="/img/iconos/danger.png">
+                    <p>Cantidad de Fallas por Heladera</p>
+                </a>
+
+                <a data-bs-toggle="offcanvas" href="#deslizadorMovimientos"
+                   class=" btn btn-lng boton">
+                    <img class="icono-reporte mb-2" src="/img/iconos/tresViandas.png">
+                    <p> Cantidad de Viandas Retiradas / Colocadas por Heladera</p>
+                </a>
+                <a data-bs-toggle="offcanvas" href="#deslizadorDonaciones"
+                   class=" btn btn-lng boton">
+                    <img class="icono-reporte mb-2" src="/img/iconos/viandasxcolab.png">
+                    <p>Cantidad de Viandas Donadas por colaborador</p>
+                </a>
+            </form>
+        </div>
+    </div>
+    <div class="offcanvas offcanvas-start deslizador" tabindex="-1" id="deslizadorFallas"
+         aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">PDFs de Fallas</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul>
+                {{#each pdfsFallas}}
+                    <li><a href="#" class="pdf-link" data-src="/{{this}}">{{getFileName this}}</a></li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+    <div class="offcanvas offcanvas-start deslizador" tabindex="-1" id="deslizadorDonaciones"
+         aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="pdfsDonacionesLabel">PDFs</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul>
+                {{#each pdfsViandasPorColaborador}}
+                    <li><a href="#" class="pdf-link" data-src="/{{this}}">{{getFileName this}}</a></li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+    <div class="offcanvas offcanvas-start deslizador" tabindex="-1" id="deslizadorMovimientos"
+         aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="pdfsColocadasLabel">PDFs</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul>
+                {{#each pdfsViandasPorHeladera}}
+                    <li><a href="#" class="pdf-link" data-src="/{{this}}">{{getFileName this}}</a></li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal pdf-container" id="pdfModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Visor de PDF</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class= "modal-body" id="pdfViewer">
+                    <iframe id="pdfFrame" src=""></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // JavaScript para manejar el clic en los enlaces
+        document.addEventListener('DOMContentLoaded', function () {
+            const links = document.querySelectorAll('.pdf-link');
+            const pdfViewer = document.getElementById('pdfViewer');
+            const pdfFrame = document.getElementById('pdfFrame');
+
+            links.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const pdfSrc = this.getAttribute('data-src');
+
+                    // Actualizar el src del iframe para mostrar el PDF
+                    pdfFrame.src = pdfSrc;
+
+                    // Mostrar el modal
+                    const pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
+                    pdfModal.show();
+                });
+            });
+        });
+    </script>
+
+    <!-- TODO Version para usar con google drive cuando subamos a la nube por que no funciona el pdf viewer en mobile
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const links = document.querySelectorAll('.pdf-link');
+            const pdfFrame = document.getElementById('pdfFrame');
+
+            links.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const pdfSrc = this.getAttribute('data-src');
+
+                    // Cargar el PDF usando Google Drive Viewer
+                    pdfFrame.src = `https://drive.google.com/viewerng/viewer?embedded=true&url=${encodeURIComponent(pdfSrc)}`;
+
+                    // Mostrar el modal
+                    const pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
+                    pdfModal.show();
+                });
+            });
+        });
+    </script>
+    -->
+
+{{/partial}}
+
+{{> templates/base}}
