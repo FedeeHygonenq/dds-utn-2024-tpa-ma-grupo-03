@@ -1,3 +1,10 @@
+## Integrantes
+@[tomas77745](https://github.com/tomas77745)
+@[MarcoSzapar](https://github.com/MarcoSzapar)
+@[lucasvazz16](https://github.com/lucasvazz16)
+@[benitezcamila](https://github.com/benitezcamila)
+@[FedeeHygonenq](https://github.com/FedeeHygonenq)
+
 # java-base-project
 
 Esta es una plantilla de proyecto diseñada para: 
