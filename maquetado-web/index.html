@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="icon" href="../resources/public/img/iconos/marca-sin-fondo.png" type="image/png">
+    <link rel="stylesheet" href="../resources/public/css/reset.css">
+    <link rel="stylesheet" href="../resources/public/css/style.css">
+    <link rel="stylesheet" href="../resources/public/css/principal.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+</head>
+<body>
+<div class="content-wrapper">
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid p-0 px-lg-2">
+            <a href="" class="navbar-brand text-black py-0 fs-3 "> <img src="../resources/public/img/iconos/marca.png" height="40em"
+                                                                        alt="Logo"
+                                                                        class="d-inline-block align-content-center">
+                Viandas de Esperanza </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#containerColapseNav"
+                    aria-controls="containerColapseNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse pe-3" id="containerColapseNav">
+                <a class="nav-link active py-0 ms-2" href="#quienesSomos">¿Quienes somos?</a>
+                <a class="nav-link active py-0 ms-2" href="#quieroContribuir">¡Quiero contribuir!</a>
+                <div class="nav-item dropdown col-lg-auto ms-auto">
+                    <a class="btn" href="./html/login.html" role="button">
+                        <b class="nav-inicio-sesion fs-5">Iniciar sesión</b>
+                        <i class="bi bi-person-circle fs-3"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="p-0">
+        <h1 class="text-center m-3" id="quienesSomos"> ¡Bienvenido!</h1>
+        <div class="container container-presentacion justify-content-center align-items-center mt-5 ">
+            <div class="row">
+                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                    <img height="250em" class="" src="../resources/public/img/iconos/marca.png">
+                </div>
+
+                <div class="container col-md-8">
+                    <div class="text-center">
+
+                        <div class="card my-5 mx-2">
+                            <h5 class="text-center card-title m-0 py-2" ><strong> ¿Quiénes somos?</strong></h5>
+                            <div class="container-texto text-center align-items-center  card-body ">
+                                <p>
+                                    <strong>Viandas de Esperanza</strong> tiene como propósito <strong>brindar apoyo
+                                    alimentario</strong> a personas en situación vulnerable, asegurando que quienes más
+                                    lo necesitan reciban <strong>viandas nutritivas y de calidad</strong>. A través de
+                                    la <em>colaboración comunitaria</em> y la <em>responsabilidad social</em>, buscamos
+                                    <strong>combatir el hambre</strong> y mejorar las condiciones de vida de aquellos
+                                    que se encuentran en situaciones de riesgo, promoviendo la
+                                    <mark>dignidad</mark>
+                                    y el
+                                    <mark>bienestar</mark>
+                                    en nuestras comunidades.
+                                </p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h5 class="text-center card-header-register mt-5 py-2"><strong> Encontrá nuestras heladeras solidarias en el
+            mapa</strong></h5>
+
+        <div class="container-texto text-center align-items-center">
+            <p class="p-4">
+                En <strong>Viandas de Esperanza</strong>, estamos comprometidos con <strong>brindar acceso gratuito a viandas
+                nutritivas</strong> para quienes más lo necesitan. Nuestras <strong>heladeras solidarias</strong>
+                están distribuidas estratégicamente en diferentes puntos de la comunidad, y puedes retirar viandas
+                simplemente utilizando tu <em>cuenta personal</em> en nuestra plataforma. Accede a nuestro <strong>mapa
+                interactivo</strong> donde encontrarás marcados todos los puntos donde puedes encontrar nuestras
+                heladeras solidarias.
+            </p>
+            <div id="map" class="mx-auto"></div>
+
+        </div>
+        <h5 class="text-center card-header-register mt-5 py-4"><strong> ¡Sumate!</strong></h5>
+        <div class="container-texto text-center align-items-center">
+            <p class="p-4">
+                En <strong>Viandas de Esperanza</strong>, creemos en el poder de la <strong>colaboración</strong> para crear un
+                <strong>impacto positivo</strong> en nuestras comunidades. Agradecemos profundamente todos los aportes
+                que nos ayudan a llevar adelante nuestra misión. <strong>Cada forma de colaboración es valiosa</strong>
+                y hace posible que continuemos trabajando para mejorar la vida de quienes enfrentan situaciones
+                difíciles. ¡<strong>Juntos podemos lograr un cambio significativo</strong>! Aprendé
+                más sobre cómo colaborar abajo...</a>
+            </p>
+
+
+        </div>
+        <div class="container container-texto  align-items-center" id="quieroContribuir">
+            <div class="row justify-content-center mb-2">
+                <form class="text-center seleccion mt-5 mb-5">
+                    <div class="col-sm">
+                        <a
+
+                                class="btn btn-sm boton p-5"
+                                href="./html/registroPersona.html">
+                            Colaborar como persona humana
+                            <i class="bi bi-person-add"></i>
+
+
+                        </a>
+                        <p class="mb-1">⮞ Hacer una o más contribuciones económicas.</p>
+                        <p class="mb-1">⮞ Donar una o más viandas.</p>
+                        <p class="mb-1">⮞ Distribuir viandas.
+                        </p>
+                    </div>
+                    <div class="col-sm">
+                        <a
+                                class="btn btn-sm boton p-5"
+                                href="html/registroColabJuridico.html">
+                            Colaborar como persona jurídica
+                            <i class="bi bi-building-add"></i>
+                        </a>
+                        <p class="mb-1">⮞ Hacerte cargo de una heladera.</p>
+                        <p class="mb-1">⮞ Hacer una o más contribuciones económicas.
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script>
+            // Lista de ubicaciones con coordenadas
+            const locations = [
+                {lat: -34.59856066714512, lng: -58.42006958251417, name: "Heladera UTN Medrano"},
+                {lat: -34.6592578698285, lng: -58.46807602392379, name: "Heladera UTN Campus"},
+            ];
+
+            function initMap() {
+                // Inicializar el mapa centrado en la primera ubicación
+                const map = L.map('map').setView([locations[0].lat, locations[0].lng], 10);
+
+                // Cargar las capas de OpenStreetMap
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                // Agregar marcadores por cada ubicación
+                locations.forEach(location => {
+                    L.marker([location.lat, location.lng])
+                        .addTo(map)
+                        .bindPopup(`<b>${location.name}</b>`);  // Texto que aparece al hacer clic en el marcador
+                });
+            }
+
+            // Inicializar el mapa cuando la página cargue
+            window.onload = initMap;
+
+        </script>
+
+    </main>
+
+    <footer class="text-white text-center p-0 py-4 footer">
+        <div class="container-fluid footer-container m-0">
+            <div class="row">
+                <!-- Enlaces a la izquierda -->
+                <div class="col-sm-6 d-flex align-items-center ">
+                    <img src="../resources/public/img/iconos/marca-sin-fondo.png" height="40em" alt="Logo" class="p-0 m-0">
+                    <p class="mb-0 ps-4">© 2024 Viandas de Esperanza. Todos los derechos reservados.</p>
+                </div>
+                <!-- Contacto a la derecha -->
+                <div class="col-sm-6 d-flex justify-content-end align-items-center pe-4">
+                    <p class=" mb-0">Contacto: </p>
+                    <a class="footer-icon" href=""><i class="bi bi-instagram ps-3"></i></a>
+                    <a class="footer-icon" href=""><i class="bi bi-twitter-x ps-3"></i></a>
+                    <a class="footer-icon" href=""><i class="bi bi-whatsapp ps-3"></i></a>
+                    <a class="footer-icon" href=""><i class="bi bi-tiktok px-3"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

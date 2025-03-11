@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Resgistrar persona vulnerable</title>
+    <link rel="icon" href="../../resources/public/img/iconos/marca-sin-fondo.png" type="image/png">
+    <link rel="stylesheet" href="../../resources/public/css/reset.css">
+    <link rel="stylesheet" href="../../resources/public/css/style.css">
+    <link rel="stylesheet" href="../../resources/public/css/gestionHeladerasYContribuciones.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+<div class="content-wrapper">
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid p-0 px-lg-2">
+            <a href="../index.html" class="navbar-brand text-black py-0 fs-3 "> <img
+                    src="../../resources/public/img/iconos/marca.png" height="60em"
+                    alt="Logo"
+                    class="d-inline-block align-content-center">
+                Viandas de Esperanza </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#containerColapseNav"
+                    aria-controls="containerColapseNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse pe-3" id="containerColapseNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active py-0" href="./homeColabHumano.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  py-0" href="about:blank">Preguntas Frecuentes</a>
+                    </li>
+                </ul>
+                <div class="nav-item dropdown col-lg-auto ms-auto">
+                    <a class="nav-link py-0 d-none d-lg-block dropdown-toggle" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Mi cuenta <i class="bi bi-person-circle fs-3"></i>
+                    </a>
+                    <a class="nav-link py-0 d-lg-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Mi cuenta
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Ver estado</a></li>
+                        <li><a class="dropdown-item" href="#">Mis contribuciones</a></li>
+                        <li><a class="dropdown-item text-danger" href="#">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="p-0">
+        <h1 class="text-center pt-4 fw-bolder">Registro de persona vulnerable</h1>
+        <div class="container container-formulario justify-content-center align-items-center ">
+            <div class="row">
+                <form class="col-md-6" id="contribucionForm">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col mb-2">
+                                <label for="firstNameForm" class="form-label">Nombre(s)*</label>
+                                <input type="text" class="form-control" id="firstNameForm" placeholder="Juan" required>
+                            </div>
+                            <div class="col mb-2">
+                                <label for="lastnameForm" class="form-label">Apellido(s)*</label>
+                                <input type="text" class="form-control" id="lastnameForm" placeholder="Perez" required>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="birthdayForm" class="form-label">Fecha de nacimiento*</label>
+                            <input type="date" class="form-control" id="birthdayForm">
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label fs-5 fw-semibold">Dirección*</label>
+                            <div class="row">
+                                <div class="col mb-2 fs-6">
+                                    <label for="streetForm" class="form-label">Calle</label>
+                                    <input type="email" class="form-control" id="streetForm" placeholder="Av. Medrano"
+                                           required>
+                                </div>
+                                <div class="col mb-2 fs-6">
+                                    <label for="streeNumbertForm" class="form-label">Altura</label>
+                                    <input type="number" class="form-control" id="streeNumbertForm" placeholder="951"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-2 fs-6">
+                                    <label for="floorForm" class="form-label">Piso/Depto</label>
+                                    <input type="text" class="form-control" id="floorForm" placeholder="PB">
+                                </div>
+                                <div class="col mb-2 fs-6">
+                                    <label for="postalCodeForm" class="form-label">Código postal</label>
+                                    <input type="number" class="form-control" id="postalCodeForm" placeholder="1173">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-2">
+                                    <label class="form-label">Tipo documento*</label>
+                                    <select class="form-select" aria-label="Tipo documento" required>
+                                        <option selected>Seleccioná una opción</option>
+                                        <option value="DNI">DNI</option>
+                                        <option value="PASAPORTE">Pasaporte</option>
+                                    </select>
+                                </div>
+                                <div class="col mb-2 fs-6">
+                                    <label for="nroDocumento" class="form-label">Nro doumento*</label>
+                                    <input type="number" class="form-control" id="nroDocumento" placeholder="20123456"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-2 fs-6">
+                                    <label for="nroTarjeta" class="form-label">Número de tarjeta*</label>
+                                    <input type="number" class="form-control" id="nroTarjeta" placeholder="12345678"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="container col-md-6 d-flex align-items-center justify-content-center">
+                    <div class="text-center">
+                        <h3 class="mb-4">¡No te olvides de agregar a los menores que tiene a cargo esta persona!</h3>
+
+                        <button id="addMinorBtn" class="btn btn-primary btn-lng boton-confirmacion mb-2">Agregar menor a
+                            cargo
+                        </button>
+                        <div id="minorList" class="list-group">
+                            <!-- Aquí se agregarán los menores -->
+                        </div>
+                        <div class="card m-4">
+                            <h5 class="text-center card-title m-0 py-2"><strong> ¡Recordá!</strong></h5>
+                            <div class="container-texto text-center align-items-center  card-body ">
+                                <p class="">
+
+                                    Por realizar esta contribución, obtendrás [X] <strong>puntos</strong>. Los mismos se
+                                    suman a tu <u>billetera</u>, la cual podrás consultar en la <u>página principal</u>,
+                                    y
+                                    podrás <u>canjear ofertas de productos patrocinados</u> en nuestro sitio.
+                                    <br></br><strong>¡Seguí contribuyendo</strong> con la causa para acumular más puntos
+                                    y
+                                    obtener más productos!
+
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center m-5">
+                            <button class="btn btn-lng boton-consulta"
+                                    onclick="document.getElementById('contribucionForm').submit();">Contribuir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../../resources/public/js/registroPersonaVulnerable.js"></script>
+
+        <script>
+            // Simulación de datos de formas de contribución (esto puede venir del backend)
+            const formasContribucion = [
+                'Repartir viandas',
+                'Donacion viandas',
+                'Apoyo financiero',
+                'Contribución de beneficios',
+                'Registrar persona vulnerable'
+                // ... más formas de contribución
+            ];
+
+            const selectFormaContribucion = document.getElementById('formaContribucion');
+
+            formasContribucion.forEach(forma => {
+                const option = document.createElement('option');
+                option.value = forma;  // Aquí el value es igual al nombre
+                option.textContent = forma;
+                selectFormaContribucion.appendChild(option);
+            });
+        </script>
+
+    </main>
+
+
+    <footer class="text-white text-center p-0 py-4 footer">
+        <div class="container-fluid footer-container m-0">
+            <div class="row">
+                <!-- Enlaces a la izquierda -->
+                <div class="col-sm-6 d-flex align-items-center ">
+                    <img src="../../resources/public/img/iconos/marca-sin-fondo.png" height="40em" alt="Logo"
+                         class="p-0 m-0">
+                    <p class="mb-0 ps-4">© 2024 Viandas de Esperanza. Todos los derechos reservados.</p>
+                </div>
+                <!-- Contacto a la derecha -->
+                <div class="col-sm-6 d-flex justify-content-end align-items-center pe-4">
+                    <p class=" mb-0">Contacto: </p>
+                    <a class="footer-icon" href="https:/instagram.com" target="_blank"><i
+                            class="bi bi-instagram ps-3"></i></a>
+                    <a class="footer-icon" href="https:/x.com" target="_blank"><i class="bi bi-twitter-x ps-3"></i></a>
+                    <a class="footer-icon" href="https:/whatsapp.com" target="_blank"><i
+                            class="bi bi-whatsapp ps-3"></i></a>
+                    <a class="footer-icon" href="https:/tiktok.com" target="_blank"><i
+                            class="bi bi-tiktok px-3"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+</div>
+
+
+</body>
+
+</html>
