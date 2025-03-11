@@ -1,0 +1,18 @@
+{
+  "colaboradores": [
+    {
+      "nombre": "Pedro",
+      "apellido": "Perez",
+      "contacto": "pperez@gmail.com",
+      "donaciones": 5,
+      "puntos": 100.0
+    },
+    {
+      "nombre": "Jose",
+      "apellido": "Gonzales",
+      "contacto": "541112345678",
+      "donaciones": 7,
+      "puntos": 175.8
+    }
+  ]
+}
